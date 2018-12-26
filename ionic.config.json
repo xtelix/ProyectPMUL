@@ -1,0 +1,7 @@
+{
+  "name": "LigaSellado",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
