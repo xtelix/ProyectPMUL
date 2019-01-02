@@ -2,7 +2,7 @@ import { HomePage } from './../home/home';
 import { RegisterProvider } from './../../providers/register/register';
 import { RegisterPage } from './../register/register';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { bloomAdd } from '@angular/core/src/render3/di';
 
 /**
@@ -21,7 +21,10 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public rp: RegisterProvider) {
+              public rp: RegisterProvider,
+              public loadingCtrl: LoadingController, 
+              public toastCtrl: ToastController
+              ) {
   }
 
   email:string;
@@ -45,5 +48,34 @@ export class LoginPage {
     console.error("Error: " +error ); 
   });
     
+  }
+
+  submitLogin(){
+
+    var that = this;
+    
+    var loader = this.loadingCtrl.create({
+          content: "Please wait..."
+        });
+        loader.present();
+       
+        this.rp.loginUserService(this.email, this.password).then(authData => {
+          //successful
+          loader.dismiss();
+          that.navCtrl.setRoot(HomePage);
+    
+        }, error => {
+    loader.dismiss();
+         // Unable to log in
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+    
+    that.password = ""//empty the password field
+    
+        });    
   }
 }

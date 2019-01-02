@@ -13,22 +13,22 @@
 
     <ion-item no-lines>
       <ion-label stacked>Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
+      <ion-input type="text" [(ngModel)]="email" name="email"  required="required"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password" name="password" required="required"></ion-input>
     </ion-item>
 
 
   </ion-list>
-
-  <ion-label stacked>Iniciar sesion</ion-label>
-  <button ion-button block color="orange" (click)="isRegister()">
-      Login
-  </button>
-
+  <div><!-- *ngIf="email && password " -->
+    <ion-label stacked>Iniciar sesion</ion-label>
+    <button ion-button block (click)="submitLogin()">
+        Login
+    </button>
+  </div>
   <ion-label stacked>No tiene cuenta?</ion-label>
   <button ion-button block color="grey" (click)="irRegistro()">
       Registrar
