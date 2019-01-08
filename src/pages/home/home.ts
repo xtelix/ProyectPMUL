@@ -1,3 +1,4 @@
+import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireList } from 'angularfire2/database';
 import { Component } from '@angular/core';
@@ -43,4 +44,11 @@ export class HomePage {
     );
   }
 
+  irLiga(item:any){
+    this.navCtrl.push(LigaPage, item);
+  }
+
+  irPage(page:string){
+    this.navCtrl.push(page);
+  }
 }

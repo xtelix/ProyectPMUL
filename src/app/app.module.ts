@@ -11,6 +11,7 @@ import { HomePage } from '../pages/home/home';
 //importamos las paginas 
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from './../pages/register/register';
+import { LigaPage } from './../pages/liga/liga';
 
 //import provider
 import { RegisterProvider } from '../providers/register/register';
@@ -36,7 +37,8 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    LigaPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    LigaPage
   ],
   providers: [
     StatusBar,

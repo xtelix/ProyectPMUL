@@ -41,13 +41,13 @@ export class RegisterPage {
 
   doSignup(){
 
-    var   account = {
+    var account = {
       email: this.email,
       password: this.password,
     };
-var that = this;
+    var that = this;
 
-var loader = this.loadingCtrl.create({
+    var loader = this.loadingCtrl.create({
       content: "Please wait...",
       
     });
@@ -59,7 +59,7 @@ var loader = this.loadingCtrl.create({
   		that.navCtrl.setRoot(HomePage);
 
   	}, error => {
-loader.dismiss();
+    loader.dismiss();
      // Unable to log in
       let toast = this.toastCtrl.create({
         message: error,

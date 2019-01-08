@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /*
   Generated class for the RegisterProvider provider.
@@ -44,7 +45,9 @@ export class RegisterProvider {
       });
     });
 
-}
+  }
+
+
 
 /*
   showAlertCreateUser() {
@@ -86,7 +89,7 @@ export class RegisterProvider {
   }
   */
 
-  logout() {
+  public logout() {
     this.angularAuth.auth.signOut();
   }
 }
