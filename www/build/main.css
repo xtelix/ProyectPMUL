@@ -33348,6 +33348,11 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-liga img {
+  width: 100%;
+  height: 30vh;
+}
+
 page-login {
   /*
     .item-input-has-focus .label-md[stacked],

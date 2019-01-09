@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { RegisterPage } from '../../pages/register/register';
 
 /*
   Generated class for the RegisterProvider provider.
@@ -32,6 +33,14 @@ export class RegisterProvider {
     return this.angularAuth.auth.signInWithEmailAndPassword(email,password);
   }
 
+  getEmailUser(): any {
+    return this.angularAuth.auth.currentUser.email.toString();
+  }
+
+  valEmail(): boolean{
+    if(this.angularAuth.auth.currentUser == null) return false;
+    else return true;   
+  }
 
   signupUserService(account: {}){
  

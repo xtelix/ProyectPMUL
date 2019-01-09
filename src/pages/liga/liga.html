@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>liga</ion-title>
+    <ion-title>Liga de {{item.nombre}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,15 @@
 
 <ion-content padding>
   <label>{{item.nombre}}</label>
+  <img src="{{meta}}"/>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button full (click)="participar(player)">Participar</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button full (click)="newGame(this.item)">Nueva Partida</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
