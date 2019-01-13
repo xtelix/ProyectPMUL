@@ -47,6 +47,8 @@ export class RegisterPage {
     };
     var that = this;
 
+    if (this.email != null && this.password != null){
+
     var loader = this.loadingCtrl.create({
       content: "Please wait...",
       
@@ -71,7 +73,15 @@ export class RegisterPage {
       that.password = ""//empty the password field
 
   	});
-
+  }else {
+            
+    let toast = this.toastCtrl.create({
+      message: 'Hay campos vacios',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
     
   }
 }

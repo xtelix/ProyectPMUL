@@ -13,6 +13,45 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding center text-center>
+  <ion-title>Nueva Partida</ion-title>
+  <img src="" alt=""/>
+  <ion-list>
 
+    <ion-item no-lines>
+      <ion-label stacked>Email jugador</ion-label>
+      <ion-input type="text" [(ngModel)]="email" value="{{this.email}}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email/nombre oponente</ion-label>
+      <ion-input type="text" [(ngModel)]=emailOp></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Resultado</ion-label>
+        <ion-select [(ngModel)]="ganador">
+          <ion-option value="{{this.email}}">Victoria</ion-option>
+          <ion-option value="{{this.emailOp}}">Derrota</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Enviar verificacion</ion-label>
+      <ion-checkbox color="primary" checked="false"></ion-checkbox>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-label stacked>Guardar Partida</ion-label>
+  <button ion-button block (click)="saveData()">
+      Guardar
+  </button>
+
+  <ion-label stacked>Limpiar Campos</ion-label>
+  <button ion-button block color="grey" (click)="clearData()" >
+      Limpiar
+  </button>
 </ion-content>

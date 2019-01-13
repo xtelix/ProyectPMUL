@@ -26,8 +26,8 @@ export class DataProvider {
     return this.afStorage.storage.ref(path).getDownloadURL();
   }
   
-  addItem(item:Player, path:string){
-    this.ListaJugadores = this.db.list<Player>(path +'/Jugadores');
+  addItem(item:any, path:string){
+    this.ListaJugadores = this.db.list<any>(path);
     return this.ListaJugadores.push(item);
   }
 

@@ -57,8 +57,10 @@ export class LoginPage {
     var loader = this.loadingCtrl.create({
           content: "Please wait..."
         });
+             
+        if(this.email != null && this.password != null){
+
         loader.present();
-       
         this.rp.loginUserService(this.email, this.password).then(authData => {
           //successful
           loader.dismiss();
@@ -76,6 +78,17 @@ export class LoginPage {
     
     that.password = ""//empty the password field
     
-        });    
+        });  
+      }else  {
+        
+        let toast = this.toastCtrl.create({
+          message: 'Hay campos vacios',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      } 
   }
+
+
 }

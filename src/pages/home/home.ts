@@ -2,7 +2,7 @@ import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireList } from 'angularfire2/database';
 import { Component, Provider } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs/Observable';
@@ -23,6 +23,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public db: AngularFireDatabase,
+              public loadingCtrl: LoadingController,
               public rp: RegisterProvider) {
     //const itemRef = this.db.object('item');
     //this.getFirebase();
@@ -47,7 +48,11 @@ export class HomePage {
   }
 
   irLiga(item:any){
-    this.navCtrl.push(LigaPage, item);
+    
+    this.navCtrl.push(LigaPage, item).then(m => {
+     
+    });
+    
   }
 
   irPage(page:string){

@@ -69,7 +69,7 @@ export class LigaPage {
   participar(item:Player){
     
     if(this.val() < 1){
-      this.dataProvider.addItem(item,this.item.nombre).then ( ref =>{
+      this.dataProvider.addItem(item,this.item.nombre+'/Jugadores').then ( ref =>{
         console.log (ref.key);
         }
       );
