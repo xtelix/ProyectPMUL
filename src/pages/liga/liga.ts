@@ -26,8 +26,8 @@ export class LigaPage {
 
   item:any;   
   meta:any;
-  email:string;
-  player:Player;
+  email:string = this.getEmail();
+
   players:Player[];
   
   constructor(public navCtrl: NavController,
@@ -38,16 +38,16 @@ export class LigaPage {
   this.item = navParams.data;
   //this.getImg(this.item.img);
   this.loadImg();
-  this.getEmail();
   
-  this.player = {  
+  
+  this.cargarJugadores('Ligas/'+this.item.nombre);
+  }
+
+  player:Player = {  
     email: this.email,
     partidas: 0,
     victorias: 0
   };
-
-  this.cargarJugadores(this.item.nombre);
-  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LigaPage');
@@ -61,20 +61,21 @@ export class LigaPage {
 
   getEmail(){    
     if(this.rp.valEmail()){
-      this.email = this.rp.getEmailUser();
+      return this.rp.getEmailUser();
     }
-    else this.email = "Anonimo";
+    else return "Anonimo";
   }
 
   participar(item:Player){
     
     if(this.val() < 1){
-      this.dataProvider.addItem(item,this.item.nombre+'/Jugadores').then ( ref =>{
+      this.dataProvider.addItem(item,'Ligas/'+this.item.nombre+'/Jugadores').then ( ref =>{
+        
         console.log (ref.key);
         }
       );
     }else {
-      this.showAlert();
+      this.showAlert('Ya esta participando!','Ahora mismo usted esta registrado en la liga de ');
     }
   }
   
@@ -97,13 +98,16 @@ export class LigaPage {
   }
 
   newGame(){
+    if(this.val() > 0){
     this.navCtrl.push(PartidaPage,this.item);
+    }else this.showAlert('Debe participar', 'Para crear una partida tiene que participar antes en');
+
   }
 
-  showAlert() {
+  showAlert(titulo:string, subtitulo:string) {
     const alert = this.alertCtrl.create({
-      title: 'Ya esta participando!',
-      subTitle: 'Ahora mismo usted esta registrado en la liga de ' +this.item.nombre,
+      title: titulo,
+      subTitle: subtitulo +' ' +this.item.nombre,
       buttons: ['OK']
     });
     alert.present();

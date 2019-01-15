@@ -1,3 +1,4 @@
+import { ProfilePage } from './../pages/profile/profile';
 import { RegisterProvider } from './../providers/register/register';
 import { RegisterPage } from './../pages/register/register';
 import { Component, ViewChild } from '@angular/core';
@@ -24,7 +25,8 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      {title: 'Home', component: HomePage}
+      {title: 'Home', component: HomePage},
+      {title: 'Perfil', component: ProfilePage}
     ];
   }
 

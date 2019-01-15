@@ -1,3 +1,4 @@
+import { ProfilePage } from './../pages/profile/profile';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -23,6 +24,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { PartidasJugadoresProvider } from '../providers/partidas-jugadores/partidas-jugadores';
 
 //Datos del proyecto en firebase
 export const firebaseConfig = {
@@ -41,7 +43,8 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     LigaPage,
-    PartidaPage
+    PartidaPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -60,14 +63,16 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     LigaPage,
-    PartidaPage
+    PartidaPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RegisterProvider,
-    DataProvider
+    DataProvider,
+    PartidasJugadoresProvider
   ]
 })
 export class AppModule {}

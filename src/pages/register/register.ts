@@ -1,3 +1,4 @@
+import { ProfilePage } from './../profile/profile';
 import { HomePage } from './../home/home';
 import { RegisterProvider } from './../../providers/register/register';
 import { Component } from '@angular/core';
@@ -58,7 +59,7 @@ export class RegisterPage {
   	this.rp.signupUserService(account).then(authData => {
   		//successful
   		loader.dismiss();
-  		that.navCtrl.setRoot(HomePage);
+  		that.navCtrl.setRoot(ProfilePage);
 
   	}, error => {
     loader.dismiss();
@@ -84,4 +85,6 @@ export class RegisterPage {
   }
     
   }
+
+
 }

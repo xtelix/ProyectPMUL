@@ -2,11 +2,13 @@ import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireList } from 'angularfire2/database';
 import { Component, Provider } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
 
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase} from '@angular/fire/database';
 import { Observable } from 'rxjs/Observable';
 import { RegisterProvider } from '../../providers/register/register';
+import{ AngularFireObject } from 'angularfire2/database';
+import { Perfil } from './../../models/player-item/userProfile-items';
 
 @Component({
   selector: 'page-home',
@@ -18,13 +20,16 @@ export class HomePage {
   //lista: Observable<any[]>;
   items;
   email: string = "";
-
+ //profileData: AngularFireObject<Perfil>
+  profiledata: Observable<any>;
   //item: string;
 
   constructor(public navCtrl: NavController,
               public db: AngularFireDatabase,
               public loadingCtrl: LoadingController,
-              public rp: RegisterProvider) {
+              public rp: RegisterProvider,
+              public afAuth: AngularFireAuth,
+              public toast: ToastController) {
     //const itemRef = this.db.object('item');
     //this.getFirebase();
     this.getFirebase();
@@ -32,9 +37,9 @@ export class HomePage {
   }
   //Get info from firebase
   getFirebase(){
-    this.db.list('/').valueChanges().subscribe(
+    this.db.list('/Ligas').valueChanges().subscribe(
       data => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         this.items = data;
       }
     );
@@ -59,4 +64,23 @@ export class HomePage {
     this.navCtrl.push(page);
   }
 
+
+  ionViewWillLoad(){
+   this.afAuth.authState.take(1).subscribe(data => {
+    if(data && data.email && data.uid){
+      this.toast.create({
+        message: `Bienvenido ${data.email}`,
+        duration: 3000
+      }).present();
+
+      this.profiledata = this.db.object(`perfil/${data.uid}`).valueChanges();
+      console.log(this.profiledata);
+    }else{
+      this.toast.create({
+        message: 'No se encuentra autenticado',
+        duration: 3000
+      }).present();
+    }
+   });
+  }
 }

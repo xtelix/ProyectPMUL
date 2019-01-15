@@ -45,58 +45,22 @@ export class RegisterProvider {
   signupUserService(account: {}){
  
     return this.angularAuth.auth.createUserWithEmailAndPassword(account['email'], account['password']).then((newUser) => {
-      //sign in the user
       this.angularAuth.auth.signInWithEmailAndPassword(account['email'], account['password']).then((authenticatedUser) => {
-        //successful login, create user profile
-      /*this.userProfile.child(authenticatedUser.uid).set(
-        account
-      );*/
       });
     });
-
   }
-
-
-
-/*
-  showAlertCreateUser() {
-    const alert = this.alertCtrl.create({
-      title: 'Usuario creado',
-      subTitle: 'Ya se encuentra registrado',
-      buttons: [{
-        text: 'OK',
-        handler: () => {
-          
-        }
-      }]
-    });
-    alert.present();
-  }
-
-  showAlertError() {
-    const alert = this.alertCtrl.create({
-      title: 'Usuario creado',
-      subTitle: 'Ya se encuentra registrado',
-      buttons: ['OK']
-    });
-    alert.present();
-  }*/
-  
   canLog:boolean;
-  
+
   /*
-  login(email:string, password:string) {
-    this.angularAuth.auth.signInWithEmailAndPassword(email,password)
-    .then((res:any) => {
-      this.canLog = true;     
-      console.log("Bienvenido " +res +this.canLog);      
-    })
-    .catch((error:any)=> {
-      console.error("Error: " +error +this.canLog);
-      this.canLog = false; 
-    });
-  }
-  */
+  async register(user: User){
+
+    try {
+      const result = await this.angularAuth.auth.createUserWithEmailAndPassword(user.email,user.password);
+      console.log(result);
+    } catch (e) {
+      console.error(e);
+    }
+  }*/
 
   public logout() {
     this.angularAuth.auth.signOut();
