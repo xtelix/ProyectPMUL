@@ -5,19 +5,24 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Login</ion-title>
+      </ion-navbar>
 </ion-header>
 <ion-content padding center text-center>
+  <!--
   <ion-title>Login</ion-title>
+  -->
   <img src="" alt=""/>
   <ion-list>
 
     <ion-item no-lines>
-      <ion-label stacked>Email</ion-label>
+      <ion-label floating>Email</ion-label>
       <ion-input type="text" [(ngModel)]="email" name="ngEmail"  required="required"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Contraseña</ion-label>
+      <ion-label floating>Contraseña</ion-label>
       <ion-input type="password" [(ngModel)]="password" name="ngPassword" required="required"></ion-input>
     </ion-item>
 

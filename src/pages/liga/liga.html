@@ -14,7 +14,6 @@
 
 
 <ion-content padding>
-  <label>{{item.nombre}}</label>
   <img src="{{meta}}"/>
   <ion-grid >
     <ion-row>
@@ -22,45 +21,54 @@
         <button ion-button full (click)="participar(player)">Participar</button>
       </ion-col>
       <ion-col col-6 *ngIf="participando">
-        <button ion-button full (click)="newGame(this.item)">Nueva Partida</button>
+          <button ion-button full color="danger" (click)="abandonar(player)">Abandonar</button>
       </ion-col>
       <ion-col col-6 *ngIf="participando">
-        <button ion-button full (click)="abandonar(player)">Abandonar</button>
+          <button ion-button full (click)="newGame(this.item)">Nueva Partida</button>
       </ion-col>
     </ion-row>
   </ion-grid>
   <!-- Lista de jugadores -->
-  <ion-content class="outer-content">
-    <ion-list>
-      <ion-list-header>
+  
+    <ion-list >
+      <ion-list-header color="primary">
         Participantes: {{participantes}}
       </ion-list-header>
   
       <ion-item-sliding *ngFor="let jugador of players">
-        <ion-item>
+        <ion-item *ngIf="jugador.email != playerTemp.email">
+          <!-- Añadir avatars de usuarios
           <ion-avatar item-start>
             
           </ion-avatar>
+          -->
           <h2>{{jugador.email}}</h2>
           <p>Partidas: {{jugador.partidas}} Victorias: {{jugador.victorias}}</p>
         </ion-item>
         <ion-item-options>
-          <button ion-button color="light" icon-start>
-            <ion-icon name="ios-more"></ion-icon>
-            More
-          </button>
-          <button ion-button color="primary" icon-start>
-            <ion-icon name="text"></ion-icon>
-            Text
-          </button>
-          <button ion-button color="secondary" icon-start>
-            <ion-icon name="call"></ion-icon>
-            Call
+          <!--
+          <button ion-button color="primary" icon-start (click)="showPlayerData(jugador)">
+            <ion-icon name="person"></ion-icon>
+            Datos
+          </button>-->
+          <button ion-button color="secondary" icon-start (click)="newGame(this.item)">
+            <ion-icon name="game-controller-b"></ion-icon>
+            Partida
           </button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
+    <ion-list *ngIf="participando">
+        <ion-list-header color="primary">
+            Jugador: {{playerTemp.email}}
+        </ion-list-header>
+        <ion-item>    
+          <label>Puntuacion: {{playerTemp.partidas + (playerTemp.victorias * 2)}}</label><br/>
+          <label>Partidas totales: {{playerTemp.partidas}}</label><br/>
+          <label>Victorias: {{playerTemp.victorias}} </label>
+        </ion-item>
+    </ion-list>
 
-  </ion-content>
+  
   <!-- lista de jugadores -->
 </ion-content>

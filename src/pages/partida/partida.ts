@@ -3,7 +3,7 @@ import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { DataProvider } from './../../providers/data/data';
 import { RegisterProvider } from './../../providers/register/register';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { EmailValidator } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { map } from 'rxjs/operators';
@@ -29,7 +29,8 @@ export class PartidaPage {
               public navParams: NavParams,
               public dataProvider: DataProvider,
               public rp:RegisterProvider,
-              public db: AngularFireDatabase) {
+              public db: AngularFireDatabase,
+              public toast: ToastController) {
     this.ligaData = navParams.data;
     this.getEmail();
     this.itemsRef = db.list("Ligas/"+this.ligaData.nombre+'/Jugadores');
@@ -63,6 +64,7 @@ export class PartidaPage {
   }
 
   saveData(){
+    if(this.val()){
     this.game = {  
       email: this.email,
       emailOP: this.emailOp,
@@ -70,6 +72,12 @@ export class PartidaPage {
     };
 
     this.participar(this.game);
+    }else {
+      this.toast.create({
+        message: 'Faltan campos requeridos',
+        duration: 3000
+      }).present();
+    }
   }
 
   participar(item:any){
@@ -91,8 +99,11 @@ export class PartidaPage {
            
   }
 
-  val(){
-
+  val(): boolean{
+    if(this.email != null && this.emailOp != null && this.ganador != null){
+      return true;
+    }return false;
+        
   }
 
   getEmail(){    

@@ -43,6 +43,8 @@ export class LigaPage {
     victorias: 0
   };
 
+  playerTemp: Player = this.player;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public dataProvider: DataProvider,
@@ -71,6 +73,7 @@ export class LigaPage {
     for (let i of lista) {
       if(i.email == this.email){
         this.player = i;
+        this.playerTemp = i;
         this.participando = true;
         console.log(this.player);
         console.log(i.key);       
@@ -110,11 +113,31 @@ export class LigaPage {
   }
 
   abandonar(p:Player){
-    this.dataProvider.dellItemy('Ligas/'+this.item.nombre+'/Jugadores',p).then(ref =>{
-      console.log (p);
-      this.navCtrl.setRoot(HomePage);
-    });
-         
+
+      let alert = this.alertCtrl.create({
+        title: 'Desea abandonar la liga?',
+        message: 'Se eliminaran todos los progresos realizados',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.dataProvider.dellItemy('Ligas/'+this.item.nombre+'/Jugadores',p).then(ref =>{
+                console.log (p);
+                this.navCtrl.setRoot(HomePage);
+              });
+            }
+          }
+        ]
+      });
+      alert.present();
+          
   }
 
   val(): boolean{
@@ -147,4 +170,7 @@ export class LigaPage {
     alert.present();
   }
 
+  showPlayerData(jugador:Player){
+    this.playerTemp = jugador;
+  }
 }

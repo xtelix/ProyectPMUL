@@ -33357,37 +33357,3 @@ page-liga img {
   width: 100%;
   height: 30vh;
 }
-
-page-login {
-  /*
-    .item-input-has-focus .label-md[stacked],
-    .input-has-focus .label-md[stacked],
-    .item-input-has-focus .label-md[floating],
-    .input-has-focus .label-md[floating],
-    .input-has-focus .input-wp-border-color
-    {
-    color: #3df5d6 !important;
-    }*/
-}
-
-page-login ion-item {
-  color: #488aff;
-}
-
-page-login ion-title * {
-  margin-top: 30vh;
-  margin-bottom: 5vh;
-}
-
-page-login .item-md.item-input .item-inner {
-  border-bottom-color: orange !important;
-}
-
-page-register ion-item {
-  color: #488aff;
-}
-
-page-register ion-title * {
-  margin-top: 30vh;
-  margin-bottom: 5vh;
-}
