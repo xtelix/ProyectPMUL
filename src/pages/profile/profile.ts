@@ -25,6 +25,8 @@ export class ProfilePage {
               public navParams: NavParams,
               public afAuth: AngularFireAuth,
               private afDatabase: AngularFireDatabase) {
+    this.perfil.imgProfile = "profile"+Math.floor(Math.random()*(5 - 1) + 1)+".png";
+    
   }
 
   ionViewDidLoad() {

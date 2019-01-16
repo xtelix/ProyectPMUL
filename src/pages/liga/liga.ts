@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { PartidaPage } from './../partida/partida';
 import { HomePage } from './../home/home';
 import { Player } from './../../models/player-item/player-item';
@@ -27,27 +29,55 @@ export class LigaPage {
   item:any;   
   meta:any;
   email:string = this.getEmail();
+  participando: boolean = false;
+  participantes: number;
 
   players:Player[];
   
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public dataProvider: DataProvider,
-              public rp: RegisterProvider,
-              public alertCtrl: AlertController) {
-  this.item = navParams.data;
-  //this.getImg(this.item.img);
-  this.loadImg();
-  
-  
-  this.cargarJugadores('Ligas/'+this.item.nombre);
-  }
+  itemsRef : AngularFireList<Player[]>;
+  items: Observable<any[]>;
 
   player:Player = {  
     email: this.email,
     partidas: 0,
     victorias: 0
   };
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public dataProvider: DataProvider,
+              public rp: RegisterProvider,
+              public alertCtrl: AlertController,
+              public db: AngularFireDatabase) {
+  this.item = navParams.data;
+  //this.getImg(this.item.img);
+  this.loadImg();
+
+  this.itemsRef = db.list("Ligas/"+this.item.nombre+'/Jugadores');
+  // Use snapshotChanges().map() to store the key
+  this.items = this.itemsRef.snapshotChanges().pipe(
+    map(changes => 
+      changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+    )
+  );
+  this.items.subscribe( c => {
+    this.players = c;
+    this.participantes = this.players.length;
+    this.searchPlayer(this.players);
+  });
+  }
+
+  searchPlayer(lista: Player[]){
+    for (let i of lista) {
+      if(i.email == this.email){
+        this.player = i;
+        this.participando = true;
+        console.log(this.player);
+        console.log(i.key);       
+      }
+      //console.log(this.player.key +' ' +this.email); 
+   }
+  } 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LigaPage');
@@ -68,7 +98,7 @@ export class LigaPage {
 
   participar(item:Player){
     
-    if(this.val() < 1){
+    if(this.val()){
       this.dataProvider.addItem(item,'Ligas/'+this.item.nombre+'/Jugadores').then ( ref =>{
         
         console.log (ref.key);
@@ -78,27 +108,31 @@ export class LigaPage {
       this.showAlert('Ya esta participando!','Ahora mismo usted esta registrado en la liga de ');
     }
   }
-  
-  cargarJugadores(liga:string){  
-    this.dataProvider.valData(liga).subscribe(
-      data => {     
-        this.players = data;
-      }
-    );  
+
+  abandonar(p:Player){
+    this.dataProvider.dellItemy('Ligas/'+this.item.nombre+'/Jugadores',p).then(ref =>{
+      console.log (p);
+      this.navCtrl.setRoot(HomePage);
+    });
+         
   }
 
-  val(): number{
+  val(): boolean{
     var num = 0;
     for (let element of this.players){    
       if(element.email == this.email){
         num++;        
       }
     }
-    return num;
+
+    if(num < 1){
+      return true;
+    } return false;
+    
   }
 
   newGame(){
-    if(this.val() > 0){
+    if(!this.val()){
     this.navCtrl.push(PartidaPage,this.item);
     }else this.showAlert('Debe participar', 'Para crear una partida tiene que participar antes en');
 

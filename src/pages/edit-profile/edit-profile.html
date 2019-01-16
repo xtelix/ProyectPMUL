@@ -7,12 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>editProfile</ion-title>
+    <ion-title>Perfil personal</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-content padding text-center >
+    <img Margin="center" src="assets/imgs/{{user.user.imgProfile}}" alt="profileImage"/>
 
+    <ion-item no-lines>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>
+    </ion-item>
+ionic serve
+    <ion-item>
+      <ion-label floating>Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>
+    </ion-item>
+
+  <ion-label stacked></ion-label>
+
+  <button ion-button clear block (click)="setProfileImage()">
+    Imagen de perfil 
+  </button>
+
+  <button ion-button clear block (click)="updateProfile()">
+      Actualizar 
+  </button>
 </ion-content>

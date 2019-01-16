@@ -17,11 +17,13 @@
         <img/>
       </ion-thumbnail>
     <button ion-button clear item-end (click)="irLiga(item)">View</button>
-    -->
-      <h1>{{(profiledata | async)?.firstName}}</h1>
+    -->  
       <h2>{{item.nombre}}</h2>
       <p>Hayao Miyazaki • {{item.fecha}}</p>      
     </ion-item>
+    <button ion-button (click)="irPageParams(profile)">
+      perfil
+    </button>
   </ion-list>
 </ion-content>
 

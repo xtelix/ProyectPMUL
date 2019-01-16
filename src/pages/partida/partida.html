@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>partida</ion-title>
   </ion-navbar>
 
@@ -19,12 +19,12 @@
   <ion-list>
 
     <ion-item no-lines>
-      <ion-label stacked>Email jugador</ion-label>
+      <ion-label floating>Email jugador</ion-label>
       <ion-input type="text" [(ngModel)]="email" value="{{this.email}}"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Email/nombre oponente</ion-label>
+      <ion-label floating>Email/nombre oponente</ion-label>
       <ion-input type="text" [(ngModel)]=emailOp></ion-input>
     </ion-item>
 

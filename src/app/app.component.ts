@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from './../pages/login/login';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
 
     this.pages = [
       {title: 'Home', component: HomePage},
-      {title: 'Perfil', component: ProfilePage}
+      {title: 'Perfil', component: EditProfilePage}
     ];
   }
 
@@ -39,12 +40,17 @@ export class MyApp {
     });
   }
 
+  user:string = "dcxcv";
   openPage(page) {
     // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    
-    this.nav.setRoot(page.component);
+    // we wouldn't want the back button to show in this scenario  
+    this.nav.setRoot(page.component, {'user': this.user});
+    }
 
+  openPageEP(data:any) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario  
+    this.nav.push(EditProfilePage,data);
     }
 
   exitUser() {
@@ -52,5 +58,6 @@ export class MyApp {
     this.nav.setRoot(LoginPage);
   }
 
+  
 }
 

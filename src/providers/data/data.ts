@@ -23,7 +23,7 @@ export class DataProvider {
   private ListaJugadores;
   
 
-  getImg(path:string):any{
+  getImg(path:string):Promise<any>{
     return this.afStorage.storage.ref(path).getDownloadURL();
   }
   
@@ -46,4 +46,13 @@ export class DataProvider {
     return this.ListaJugadores.update(item.key, item);
   }
 
+  editItemKey(item:any, path:string, key:any){
+    this.ListaJugadores = this.db.list<any>(path);
+    return this.ListaJugadores.update(key, item);
+  }
+
+ dellItemy(path:string, item:Player){
+    this.ListaJugadores = this.db.list<any>(path);
+    return this.ListaJugadores.remove(item.key);
+  }
 }

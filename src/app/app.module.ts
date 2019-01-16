@@ -1,4 +1,3 @@
-import { ProfilePage } from './../pages/profile/profile';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,13 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 
 //importamos las paginas 
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from './../pages/register/register';
 import { LigaPage } from './../pages/liga/liga';
 import { PartidaPage } from './../pages/partida/partida';
+import { HomePage } from '../pages/home/home';
+import { ProfilePage } from './../pages/profile/profile';
+import { EditProfilePage } from './../pages/edit-profile/edit-profile';
 
 //import providers
 import { RegisterProvider } from '../providers/register/register';
@@ -25,6 +26,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { PartidasJugadoresProvider } from '../providers/partidas-jugadores/partidas-jugadores';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 //Datos del proyecto en firebase
 export const firebaseConfig = {
@@ -44,7 +46,8 @@ export const firebaseConfig = {
     RegisterPage,
     LigaPage,
     PartidaPage,
-    ProfilePage
+    ProfilePage,
+    EditProfilePage
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,7 +68,8 @@ export const firebaseConfig = {
     RegisterPage,
     LigaPage,
     PartidaPage,
-    ProfilePage
+    ProfilePage,
+    EditProfilePage
   ],
   providers: [
     StatusBar,
@@ -72,7 +77,11 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RegisterProvider,
     DataProvider,
-    PartidasJugadoresProvider
+    PartidasJugadoresProvider,
+    Camera
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  
+}

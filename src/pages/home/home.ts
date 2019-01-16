@@ -1,3 +1,5 @@
+import { DataProvider } from './../../providers/data/data';
+import { EditProfilePage } from './../edit-profile/edit-profile';
 import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireList } from 'angularfire2/database';
@@ -22,18 +24,23 @@ export class HomePage {
   email: string = "";
  //profileData: AngularFireObject<Perfil>
   profiledata: Observable<any>;
+  profile: any;
+  meta:string;
   //item: string;
-
+ d: string = "Dominaria_.jpg";
   constructor(public navCtrl: NavController,
               public db: AngularFireDatabase,
               public loadingCtrl: LoadingController,
               public rp: RegisterProvider,
               public afAuth: AngularFireAuth,
-              public toast: ToastController) {
+              public toast: ToastController,
+              public dataProvider: DataProvider) {
     //const itemRef = this.db.object('item');
     //this.getFirebase();
     this.getFirebase();
     this.getEmail();
+    console.log(Math.floor(Math.random()*(4 - 1) + 1));
+    //this.loadImg("Dominaria_.jpg");
   }
   //Get info from firebase
   getFirebase(){
@@ -64,6 +71,10 @@ export class HomePage {
     this.navCtrl.push(page);
   }
 
+  irPageParams(param:any){
+    
+    this.navCtrl.push(EditProfilePage, param);
+  }
 
   ionViewWillLoad(){
    this.afAuth.authState.take(1).subscribe(data => {
@@ -74,7 +85,14 @@ export class HomePage {
       }).present();
 
       this.profiledata = this.db.object(`perfil/${data.uid}`).valueChanges();
-      console.log(this.profiledata);
+      this.profiledata.subscribe(val => {
+        this.profile = {
+          user: val,
+          userId: data.uid
+        };
+      });
+
+      
     }else{
       this.toast.create({
         message: 'No se encuentra autenticado',
