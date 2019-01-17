@@ -36,7 +36,7 @@ export class ProfilePage {
   createProfile(){
     this.afAuth.authState.take(1).subscribe(auth =>{
       this.afDatabase.object(`perfil/${auth.uid}`).set(this.perfil)
-        .then(()=> this.navCtrl.push(HomePage));
+        .then(()=> this.navCtrl.setRoot(HomePage));
     });
   }
 }

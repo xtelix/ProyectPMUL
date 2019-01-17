@@ -21,7 +21,7 @@ export class DataProvider {
   }
   
   private ListaJugadores;
-  
+  private ang: AngularFireList<any>;
 
   getImg(path:string):Promise<any>{
     return this.afStorage.storage.ref(path).getDownloadURL();
@@ -30,6 +30,12 @@ export class DataProvider {
   addItem(item:any, path:string){
     this.ListaJugadores = this.db.list<any>(path);
     return this.ListaJugadores.push(item);
+  }
+
+  //Agregar tags custom
+  addItemCustomKey(item:any, path:string){
+    this.ang = this.db.list<any>(path);
+    this.db.object(`/`).update({[item.key]: true});
   }
 
   getItemList(path:string){

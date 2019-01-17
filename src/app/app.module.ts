@@ -14,6 +14,7 @@ import { PartidaPage } from './../pages/partida/partida';
 import { HomePage } from '../pages/home/home';
 import { ProfilePage } from './../pages/profile/profile';
 import { EditProfilePage } from './../pages/edit-profile/edit-profile';
+import { AddLigaPage } from './../pages/add-liga/add-liga';
 
 //import providers
 import { RegisterProvider } from '../providers/register/register';
@@ -47,7 +48,8 @@ export const firebaseConfig = {
     LigaPage,
     PartidaPage,
     ProfilePage,
-    EditProfilePage
+    EditProfilePage,
+    LigaPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ export const firebaseConfig = {
     LigaPage,
     PartidaPage,
     ProfilePage,
-    EditProfilePage
+    EditProfilePage,
+    LigaPage
   ],
   providers: [
     StatusBar,

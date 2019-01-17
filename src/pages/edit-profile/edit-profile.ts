@@ -20,6 +20,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class EditProfilePage {
 
   user:any;
+  myPhoto:any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -55,6 +56,7 @@ export class EditProfilePage {
           handler: () => {
             this.dbProvider.editItemKey(this.user.user, "perfil/", this.user.userId).then(ref =>{
               //console.log (ref.key);
+              this.user.imgProfile = this.myPhoto;
               this.toast.create({
                 message: 'Actualizando',
                 duration: 2000
@@ -68,10 +70,10 @@ export class EditProfilePage {
     alert.present();
   }
 
-  setProfileImage(){
+  takeProfileImage(){
     const options: CameraOptions = {
       quality: 70,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
@@ -79,8 +81,34 @@ export class EditProfilePage {
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     this.myPhoto = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
+      this.toast.create({
+        message: `Error: ${err}`,
+        duration: 3000
+      }).present();
+     // Handle error
+    });
+  }
+
+  getProfileImage(){
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+     console.log(this.myPhoto);
+    }, (err) => {
+      this.toast.create({
+        message: `Error: ${err}`,
+        duration: 3000
+      }).present();
      // Handle error
     });
   }

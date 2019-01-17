@@ -1,4 +1,4 @@
-webpackJsonp([6],{
+webpackJsonp([7],{
 
 /***/ 159:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -272,17 +272,22 @@ var PartidaPage = /** @class */ (function () {
         }
     };
     PartidaPage.prototype.participar = function (item) {
+        var _this = this;
         this.dataProvider.addItem(item, 'Ligas/' + this.ligaData.nombre + '/Partidas').then(function (ref) {
             console.log(ref.key);
             //this.dataProvider.editItem(this.player, '/'+this.ligaData.nombre+'/Jugadores');
-        });
-        this.player.partidas++;
-        if (item.ganador == item.email) {
-            this.player.victorias++;
-        }
-        //console.log(this.player); 
-        this.dataProvider.editItem(this.player, 'Ligas/' + this.ligaData.nombre + '/Jugadores').then(function (ref) {
-            //console.log (ref.key);
+            _this.player.partidas++;
+            if (item.ganador == item.email) {
+                _this.player.victorias++;
+            }
+            //console.log(this.player); 
+            _this.dataProvider.editItem(_this.player, 'Ligas/' + _this.ligaData.nombre + '/Jugadores').then(function (ref) {
+                //console.log (ref.key);
+                _this.toast.create({
+                    message: 'Partida Guardada',
+                    duration: 3000
+                }).present();
+            });
         });
     };
     PartidaPage.prototype.val = function () {
@@ -590,12 +595,12 @@ var ProfilePage = /** @class */ (function () {
         var _this = this;
         this.afAuth.authState.take(1).subscribe(function (auth) {
             _this.afDatabase.object("perfil/" + auth.uid).set(_this.perfil)
-                .then(function () { return _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]); });
+                .then(function () { return _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]); });
         });
     };
     ProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["m" /* Component */])({
-            selector: 'page-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\profile\profile.html"*/'<!--\n  Generated template for the ProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="perfil.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="perfil.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked></ion-label>\n  <button ion-button clear block (click)="createProfile()">\n      Crear Perfil\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\profile\profile.html"*/,
+            selector: 'page-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\profile\profile.html"*/'<!--\n  Generated template for the ProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="perfil.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="perfil.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked></ion-label>\n  <button ion-button block (click)="createProfile()">\n      Crear Perfil\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\profile\profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavParams */],
@@ -630,29 +635,33 @@ webpackEmptyAsyncContext.id = 202;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"../pages/edit-profile/edit-profile.module": [
+	"../pages/add-liga/add-liga.module": [
 		522,
-		5
+		0
+	],
+	"../pages/edit-profile/edit-profile.module": [
+		523,
+		6
 	],
 	"../pages/liga/liga.module": [
-		523,
-		4
+		524,
+		5
 	],
 	"../pages/login/login.module": [
-		524,
-		3
+		525,
+		4
 	],
 	"../pages/partida/partida.module": [
-		525,
-		2
+		526,
+		3
 	],
 	"../pages/profile/profile.module": [
-		526,
-		1
+		527,
+		2
 	],
 	"../pages/register/register.module": [
-		527,
-		0
+		528,
+		1
 	]
 };
 function webpackAsyncContext(req) {
@@ -770,12 +779,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_liga_liga__["a" /* LigaPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_partida_partida__["a" /* PartidaPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__["a" /* ProfilePage */],
-                __WEBPACK_IMPORTED_MODULE_12__pages_edit_profile_edit_profile__["a" /* EditProfilePage */]
+                __WEBPACK_IMPORTED_MODULE_12__pages_edit_profile_edit_profile__["a" /* EditProfilePage */],
+                __WEBPACK_IMPORTED_MODULE_8__pages_liga_liga__["a" /* LigaPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
+                        { loadChildren: '../pages/add-liga/add-liga.module#AddLigaPageModule', name: 'AddLigaPage', segment: 'add-liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/edit-profile/edit-profile.module#EditProfilePageModule', name: 'EditProfilePage', segment: 'edit-profile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/liga/liga.module#LigaPageModule', name: 'LigaPage', segment: 'liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
@@ -800,7 +811,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_liga_liga__["a" /* LigaPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_partida_partida__["a" /* PartidaPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__["a" /* ProfilePage */],
-                __WEBPACK_IMPORTED_MODULE_12__pages_edit_profile_edit_profile__["a" /* EditProfilePage */]
+                __WEBPACK_IMPORTED_MODULE_12__pages_edit_profile_edit_profile__["a" /* EditProfilePage */],
+                __WEBPACK_IMPORTED_MODULE_8__pages_liga_liga__["a" /* LigaPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
@@ -1028,6 +1040,10 @@ var HomePage = /** @class */ (function () {
         this.email = "";
         //item: string;
         this.d = "Dominaria_.jpg";
+        this.liga = {
+            key: "liga2",
+            jorge: "andres"
+        };
         //const itemRef = this.db.object('item');
         //this.getFirebase();
         this.getFirebase();
@@ -1072,7 +1088,8 @@ var HomePage = /** @class */ (function () {
                 _this.profiledata.subscribe(function (val) {
                     _this.profile = {
                         user: val,
-                        userId: data.uid
+                        userId: data.uid,
+                        email: _this.email
                     };
                 });
             }
@@ -1084,9 +1101,12 @@ var HomePage = /** @class */ (function () {
             }
         });
     };
+    HomePage.prototype.addLiga = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__liga_liga__["a" /* LigaPage */], this.profile);
+    };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <button ion-button (click)="irPageParams(profile)" item-end>\n        <ion-icon name="person" ></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" (click)="irLiga(item)">\n      <!--\n      <ion-thumbnail item-start>\n        <img/>\n      </ion-thumbnail>\n    <button ion-button clear item-end (click)="irLiga(item)">View</button>\n    -->  \n      <h2>{{item.nombre}}</h2>\n      <p>Hayao Miyazaki • {{item.fecha}}</p>      \n    </ion-item>    \n  </ion-list>\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <button ion-button (click)="irPageParams(profile)" item-end>\n        <ion-icon name="person" ></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" (click)="irLiga(item)">\n      <!--\n      <ion-thumbnail item-start>\n        <img/>\n      </ion-thumbnail>\n    <button ion-button clear item-end (click)="irLiga(item)">View</button>\n    -->  \n      <h2>{{item.nombre}}</h2>\n      <p>Hayao Miyazaki • {{item.fecha}}</p>      \n    </ion-item>    \n  </ion-list>\n\n  <ion-item>\n    <button ion-button>\n      <ion-icon name="add-circle" (click)="addLiga()"></ion-icon>\n    </button>\n  </ion-item>\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_6__angular_fire_database__["AngularFireDatabase"],
@@ -1182,6 +1202,12 @@ var DataProvider = /** @class */ (function () {
     DataProvider.prototype.addItem = function (item, path) {
         this.ListaJugadores = this.db.list(path);
         return this.ListaJugadores.push(item);
+    };
+    //Agregar tags custom
+    DataProvider.prototype.addItemCustomKey = function (item, path) {
+        this.ang = this.db.list(path);
+        this.db.object("/").update((_a = {}, _a[item.key] = true, _a));
+        var _a;
     };
     DataProvider.prototype.getItemList = function (path) {
         this.ListaJugadores = this.db.list(path);
@@ -1290,24 +1316,49 @@ var EditProfilePage = /** @class */ (function () {
         });
         alert.present();
     };
-    EditProfilePage.prototype.setProfileImage = function () {
+    EditProfilePage.prototype.takeProfileImage = function () {
+        var _this = this;
         var options = {
             quality: 70,
-            destinationType: this.camera.DestinationType.FILE_URI,
+            destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE
         };
         this.camera.getPicture(options).then(function (imageData) {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64 (DATA_URL):
-            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
         }, function (err) {
+            _this.toast.create({
+                message: "Error: " + err,
+                duration: 3000
+            }).present();
+            // Handle error
+        });
+    };
+    EditProfilePage.prototype.getProfileImage = function () {
+        var _this = this;
+        var options = {
+            quality: 70,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            saveToPhotoAlbum: false
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            _this.toast.create({
+                message: "Error: " + err,
+                duration: 3000
+            }).present();
             // Handle error
         });
     };
     EditProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <img Margin="center" src="assets/imgs/{{user.user.imgProfile}}" alt="profileImage"/>\n\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\nionic serve\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked></ion-label>\n\n  <button ion-button clear block (click)="setProfileImage()">\n    Imagen de perfil \n  </button>\n\n  <button ion-button clear block (click)="updateProfile()">\n      Actualizar \n  </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
+            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <img Margin="center" src="{{myPhoto}}" alt="profileImage"/>\n    <img Margin="center" src="assets/imgs/{{user.user.imgProfile}}" alt="profileImage"/>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Cambiar imagen de perfil</ion-label>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col col-6 >\n        <button ion-button block (click)="takeProfileImage()">\n          Camara\n        </button>      \n      </ion-col>\n      <ion-col col-6 >\n        <button ion-button block (click)="getProfileImage()">\n          Galeria\n        </button>      \n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <button ion-button clear block (click)="updateProfile()">\n      Actualizar Perfil \n  </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],

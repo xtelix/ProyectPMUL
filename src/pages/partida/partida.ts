@@ -85,17 +85,22 @@ export class PartidaPage {
       this.dataProvider.addItem(item,'Ligas/'+this.ligaData.nombre+'/Partidas').then ( ref =>{
         console.log (ref.key);
         //this.dataProvider.editItem(this.player, '/'+this.ligaData.nombre+'/Jugadores');
+        this.player.partidas++;
+        if(item.ganador == item.email){
+          this.player.victorias++;   
+        }  
+        //console.log(this.player); 
+        
+        this.dataProvider.editItem(this.player,'Ligas/'+this.ligaData.nombre+'/Jugadores').then(ref =>{
+          //console.log (ref.key);
+          this.toast.create({
+            message: 'Partida Guardada',
+            duration: 3000
+          }).present();
+        });
       });
       
-      this.player.partidas++;
-      if(item.ganador == item.email){
-        this.player.victorias++;   
-      }  
-      //console.log(this.player); 
-      
-      this.dataProvider.editItem(this.player,'Ligas/'+this.ligaData.nombre+'/Jugadores').then(ref =>{
-        //console.log (ref.key);
-      });
+
            
   }
 

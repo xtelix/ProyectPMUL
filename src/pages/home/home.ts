@@ -1,3 +1,4 @@
+import { Liga } from './../../models/player-item/league-item';
 import { DataProvider } from './../../providers/data/data';
 import { EditProfilePage } from './../edit-profile/edit-profile';
 import { LigaPage } from './../liga/liga';
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { RegisterProvider } from '../../providers/register/register';
 import{ AngularFireObject } from 'angularfire2/database';
 import { Perfil } from './../../models/player-item/userProfile-items';
+
 
 @Component({
   selector: 'page-home',
@@ -88,7 +90,8 @@ export class HomePage {
       this.profiledata.subscribe(val => {
         this.profile = {
           user: val,
-          userId: data.uid
+          userId: data.uid,
+          email: this.email
         };
       });
 
@@ -100,5 +103,16 @@ export class HomePage {
       }).present();
     }
    });
+  }
+
+  liga:any = {
+    key: "liga2",
+    jorge: "andres"
+  }
+
+  addLiga(){
+
+    this.navCtrl.push(LigaPage, this.profile);
+
   }
 }
