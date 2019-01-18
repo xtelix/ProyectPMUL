@@ -1,3 +1,4 @@
+import { FirebaseStorage } from 'angularfire2';
 import { HomePage } from './../home/home';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
@@ -21,22 +22,30 @@ export class EditProfilePage {
 
   user:any;
   myPhoto:any;
+  meta: string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public dbProvider: DataProvider,
               public alertCtrl: AlertController,
-              public toast: ToastController,
-              private camera: Camera) {
+              public toast: ToastController) {
       this.user = navParams.data; 
       console.log(this.user);
-   
+      this.dbProvider.ancho = 125;
+      this.dbProvider.alto = 125;
+      this.loadImg();
       //console.log(navParams.data); 
       //console.log(this.user.subscribe(val => console.log(val)));      
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditProfilePage');
+  }
+
+  loadImg(){   
+    this.dbProvider.getImg(this.user.user.imgProfile).then((url)=>{     
+      this.meta = url;
+    });
   }
 
   updateProfile(){
@@ -54,9 +63,9 @@ export class EditProfilePage {
         {
           text: 'Confirmar',
           handler: () => {
+            this.user.user.imgProfile = this.dbProvider.fileName;
             this.dbProvider.editItemKey(this.user.user, "perfil/", this.user.userId).then(ref =>{
               //console.log (ref.key);
-              this.user.imgProfile = this.myPhoto;
               this.toast.create({
                 message: 'Actualizando',
                 duration: 2000
@@ -71,45 +80,26 @@ export class EditProfilePage {
   }
 
   takeProfileImage(){
-    const options: CameraOptions = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     this.myPhoto = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
+    try{
+      this.dbProvider.uploadHandler();   
+    }catch(e){
       this.toast.create({
-        message: `Error: ${err}`,
-        duration: 3000
+        message: 'Error: ' +e,
+        duration: 2000
       }).present();
-     // Handle error
-    });
+    }
+
+    
   }
 
   getProfileImage(){
-    const options: CameraOptions = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: false
-    }
-    
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     this.myPhoto = 'data:image/jpeg;base64,' + imageData;
-     console.log(this.myPhoto);
-    }, (err) => {
+    try{
+    this.dbProvider.uploadHandlerGet();
+    }catch(e){
       this.toast.create({
-        message: `Error: ${err}`,
-        duration: 3000
+        message: 'Error: ' +e,
+        duration: 2000
       }).present();
-     // Handle error
-    });
+    }  
   }
 }

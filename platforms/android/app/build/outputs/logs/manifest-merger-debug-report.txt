@@ -11,15 +11,18 @@ INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\androi
 	android:name
 		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:12:127-180
 manifest
-ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
+ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\acace36bd4f3a5fc6355f1c887a9fda2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5bd83279ddef72d8b60d06e953131638\AndroidManifest.xml:2:1-9:12
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:17:1-27:12
 MERGED from [:CordovaLib] C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:1-27:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
 	package
 		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:2:98-124
 		INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml
@@ -55,7 +58,13 @@ ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\a
 	android:name
 		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:5:5-15:19
+ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:5:5-16:19
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\acace36bd4f3a5fc6355f1c887a9fda2\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\acace36bd4f3a5fc6355f1c887a9fda2\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5bd83279ddef72d8b60d06e953131638\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5bd83279ddef72d8b60d06e953131638\AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:25:5-20
 	android:supportsRtl
@@ -92,26 +101,40 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
+activity#com.synconset.MultiImageChooserActivity
+ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:15:9-160
+	android:label
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:15:19-57
+	android:theme
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:15:113-157
+	android:name
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:15:58-112
 uses-sdk
-ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
+ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\acace36bd4f3a5fc6355f1c887a9fda2\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\acace36bd4f3a5fc6355f1c887a9fda2\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5bd83279ddef72d8b60d06e953131638\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5bd83279ddef72d8b60d06e953131638\AndroidManifest.xml:5:5-43
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:21:5-23:54
 MERGED from [:CordovaLib] C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
-INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
+INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.1.1] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\4c81a955c2b1b38b598c53e1865c6bab\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:appcompat-v7:23.4.0] C:\Users\xtelix\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\3fc4683a8ffa031248a8c6bbf8ab7bac\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
-		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:16:42-71
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:42-71
 	android:minSdkVersion
-		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:16:15-41
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:15-41
 		INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:5-81
+ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:18:5-81
 	android:name
-		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:17:22-78
+		ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:18:22-78
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\platforms\android\app\src\main\AndroidManifest.xml:13:13-123
 	android:resource

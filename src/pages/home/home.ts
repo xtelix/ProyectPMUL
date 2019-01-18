@@ -1,3 +1,4 @@
+import { AddLigaPage } from './../add-liga/add-liga';
 import { Liga } from './../../models/player-item/league-item';
 import { DataProvider } from './../../providers/data/data';
 import { EditProfilePage } from './../edit-profile/edit-profile';
@@ -112,7 +113,8 @@ export class HomePage {
 
   addLiga(){
 
-    this.navCtrl.push(LigaPage, this.profile);
+    this.navCtrl.push(AddLigaPage, this.profile);
 
   }
+  
 }

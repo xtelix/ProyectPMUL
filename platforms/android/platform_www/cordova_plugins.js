@@ -71,6 +71,14 @@ module.exports = [
     "clobbers": [
       "window.Keyboard"
     ]
+  },
+  {
+    "id": "cordova-plugin-telerik-imagepicker.ImagePicker",
+    "file": "plugins/cordova-plugin-telerik-imagepicker/www/imagepicker.js",
+    "pluginId": "cordova-plugin-telerik-imagepicker",
+    "clobbers": [
+      "plugins.imagePicker"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -82,7 +90,8 @@ module.exports.metadata =
   "cordova-plugin-device": "2.0.2",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-ionic-webview": "2.3.1",
-  "cordova-plugin-ionic-keyboard": "2.1.3"
+  "cordova-plugin-ionic-keyboard": "2.1.3",
+  "cordova-plugin-telerik-imagepicker": "2.2.3"
 };
 // BOTTOM OF METADATA
 });

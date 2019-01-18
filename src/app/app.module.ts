@@ -49,7 +49,7 @@ export const firebaseConfig = {
     PartidaPage,
     ProfilePage,
     EditProfilePage,
-    LigaPage
+    AddLigaPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +72,7 @@ export const firebaseConfig = {
     PartidaPage,
     ProfilePage,
     EditProfilePage,
-    LigaPage
+    AddLigaPage
   ],
   providers: [
     StatusBar,

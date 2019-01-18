@@ -52,6 +52,7 @@ export class LigaPage {
               public alertCtrl: AlertController,
               public db: AngularFireDatabase) {
   this.item = navParams.data;
+
   //this.getImg(this.item.img);
   this.loadImg();
 

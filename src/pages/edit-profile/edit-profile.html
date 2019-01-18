@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-content padding text-center >
-    <img Margin="center" src="assets/imgs/{{user.user.imgProfile}}" alt="profileImage"/>
+    <img Margin="center" src="{{meta}}" alt="profileImage"/>
     <ion-item no-lines>
       <ion-label floating>Nombre</ion-label>
       <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>
@@ -44,8 +44,10 @@
   </ion-grid>
 
   <button ion-button clear block (click)="updateProfile()">
-      Actualizar Perfil 
+      Actualizar Perfil
   </button>
-  <img Margin="center" src="{{myPhoto}}" alt="profileImage" width="100%"/>
 
+  <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>
+  <img *ngIf="dbProvider.image" [src]="dbProvider.image"/>
+  
 </ion-content>

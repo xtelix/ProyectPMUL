@@ -9,14 +9,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from './../pages/login/login';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
-
+// ionic cordova build android --> genera el apk
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
   pages:Array<{title: string, component:any}>;
 
   constructor(public platform: Platform,

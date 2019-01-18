@@ -18,22 +18,28 @@
     
 
     <ion-item no-lines>
-      <ion-label floating>Nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="profile.user.firstName"></ion-input>
+      <ion-label floating>Nombre de la liga</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Creador</ion-label>
-      <ion-input type="text" [(ngModel)]="profile.email"></ion-input>
+      <ion-label floating>Imagen</ion-label>
+      <ion-input type="text" [(ngModel)]="dp.fileName"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label floating>Fecha</ion-label>
+      <ion-input type="text" [(ngModel)]="fecha"></ion-input>
     </ion-item>
 
-  <ion-label stacked></ion-label>
-
-  <button ion-button clear block >
-    Imagen de perfil 
+  <ion-label stacked>Seleccione una imagen</ion-label>
+  <button ion-button  block (click)="uploadImg()">
+    Imagen de portada 
   </button>
 
-  <button ion-button clear block >
-      Actualizar 
+  <button ion-button clear block (click)="crearLiga(ruta)">
+      Crear Liga 
   </button>
+
+  
 </ion-content>
