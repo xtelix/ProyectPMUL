@@ -6,7 +6,7 @@ import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireList } from 'angularfire2/database';
 import { Component, Provider } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase} from '@angular/fire/database';
 import { Observable } from 'rxjs/Observable';
@@ -37,7 +37,8 @@ export class HomePage {
               public rp: RegisterProvider,
               public afAuth: AngularFireAuth,
               public toast: ToastController,
-              public dataProvider: DataProvider) {
+              public dataProvider: DataProvider,
+              public alertCtrl: AlertController) {
     //const itemRef = this.db.object('item');
     //this.getFirebase();
     this.getFirebase();
@@ -45,7 +46,7 @@ export class HomePage {
     console.log(Math.floor(Math.random()*(4 - 1) + 1));
     //this.loadImg("Dominaria_.jpg");
   }
-  //Get info from firebase
+  //toma informacion de firebase
   getFirebase(){
     this.db.list('/Ligas').valueChanges().subscribe(
       data => {
@@ -55,6 +56,37 @@ export class HomePage {
     );
   }
 
+  //Elimina la liga pasada por parametro del firebase
+  delLiga(l:Liga){
+
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar cambios',
+      message: 'Quiere borrar la liga de '+l.nombre +'?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            alert.present();
+
+            let lig = this.db.list<any>("Ligas/")
+            lig.remove(l.nombre).then(c => {
+              console.log("Borrado");
+            });
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  //get correo del usuario registrado, anonimo si no hay defecto
   getEmail(){    
     if(this.rp.valEmail()){
       this.email = this.rp.getEmailUser();
@@ -79,6 +111,7 @@ export class HomePage {
     this.navCtrl.push(EditProfilePage, param);
   }
 
+  //Mensaje de bienvenida para usuariosautenticados
   ionViewWillLoad(){
    this.afAuth.authState.take(1).subscribe(data => {
     if(data && data.email && data.uid){

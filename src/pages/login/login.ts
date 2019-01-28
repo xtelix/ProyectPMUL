@@ -55,7 +55,7 @@ export class LoginPage {
     var that = this;
     
     var loader = this.loadingCtrl.create({
-          content: "Please wait..."
+          content: "Por favor espere..."
         });
              
         if(this.email != null && this.password != null){

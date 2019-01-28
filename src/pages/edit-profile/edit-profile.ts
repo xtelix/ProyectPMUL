@@ -1,11 +1,7 @@
-import { FirebaseStorage } from 'angularfire2';
 import { HomePage } from './../home/home';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 /**
  * Generated class for the EditProfilePage page.
  *
@@ -48,6 +44,7 @@ export class EditProfilePage {
     });
   }
 
+  //ACTUALIZA DATOS DE PERFIL DE USUARIO
   updateProfile(){
     let alert = this.alertCtrl.create({
       title: 'Confirmar cambios',
@@ -79,6 +76,7 @@ export class EditProfilePage {
     alert.present();
   }
 
+  //TOMA LA IMAGEN DEL PERFIL DEL USUARIO ACTUAL
   takeProfileImage(){
     try{
       this.dbProvider.uploadHandler();   
@@ -91,7 +89,7 @@ export class EditProfilePage {
 
     
   }
-
+  //OBTIENE LA IMAGEN DEL PERFIL DEL USUARIO ACTUAL
   getProfileImage(){
     try{
     this.dbProvider.uploadHandlerGet();

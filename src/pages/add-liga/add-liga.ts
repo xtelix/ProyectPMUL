@@ -5,9 +5,6 @@ import { Liga } from './../../models/player-item/league-item';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
-import { initializeApp, storage } from 'firebase';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { diPublic } from '@angular/core/src/render3/instructions';
 
 /**
  * Generated class for the AddLigaPage page.
@@ -41,7 +38,8 @@ export class AddLigaPage {
               public dp: DataProvider) {
 
     this.profile = navParams.data;
-    this.currentDate();
+
+    this.dp.image = "";
     this.dp.ancho = 800;
     this.dp.alto = 650;
   }
@@ -50,24 +48,9 @@ export class AddLigaPage {
     console.log('ionViewDidLoad AddLigaPage');
   }
 
-  currentDate(){
-    var today = new Date();
-    var dd = today.getDay();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
+  myDate: string = new Date().toDateString();
 
-    if (dd < 10) {
-      this.dia = '0' + dd;
-    }
-
-    if (mm < 10) {
-      this.mes = '0' + mm;
-    }
-
-    this.fecha = this.mes + '/' + this.dia + '/' + yyyy;
-    //document.write(this.fecha);
-  }
-
+  //SUBIR IMAGEN
   uploadImg(){
     try{
     this.dp.uploadHandlerGet();
@@ -78,38 +61,46 @@ export class AddLigaPage {
       }).present();
     }
   }
-   
+  
+  
   valLiga(item: Liga): boolean{
 
-    if(item.fecha != "" && item.fecha != null &&
-       item.img != "" && item.img != null &&
+    if(item.fecha != "" && item.fecha != null &&     
        item.nombre != "" && item.nombre != null){
       return true;
     }else return false;
   }
 
+  //GUARDA UNA LIGA EN FIREBASE
   crearLiga(path: string){
 
   this.liga = {
     nombre: this.nombre,
     img: this.dp.fileName,
     img_: this.dp.fileName,
-    fecha: this.fecha
+    fecha: this.myDate
   };
 
   console.log(this.liga);
     if(this.valLiga(this.liga)){
-    this.dp.addItemCustomKey(this.liga,path,this.liga.nombre).then(()=>{
-      this.toast.create({
-        message: 'Liga creada exitosamente!',
-        duration: 3000
-      }).present();
-    }).catch(err =>{
-      this.toast.create({
-        message: err,
-        duration: 3000
-      }).present();
-    });
+      if(this.liga.img != "" && this.liga.img != null){
+        this.dp.addItemCustomKey(this.liga,path,this.liga.nombre).then(()=>{
+          this.toast.create({
+            message: 'Liga creada exitosamente!',
+            duration: 3000
+          }).present();
+        }).catch(err =>{
+          this.toast.create({
+            message: err,
+            duration: 3000
+          }).present();
+        });
+      }else{
+        this.toast.create({
+          message: "Seleccione una imagen",
+          duration: 3000
+        }).present();
+      }
     }else{
       this.toast.create({
         message: "Hay campos vacios",

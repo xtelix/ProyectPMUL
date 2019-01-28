@@ -19,6 +19,7 @@ import { AddLigaPage } from './../pages/add-liga/add-liga';
 //import providers
 import { RegisterProvider } from '../providers/register/register';
 import { DataProvider } from './../providers/data/data';
+import { PartidasJugadoresProvider } from '../providers/partidas-jugadores/partidas-jugadores';
 
 //Firebase imports
 import { AngularFireModule, FirebaseAuth } from 'angularfire2';
@@ -26,7 +27,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-import { PartidasJugadoresProvider } from '../providers/partidas-jugadores/partidas-jugadores';
+//camara movil
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 //Datos del proyecto en firebase

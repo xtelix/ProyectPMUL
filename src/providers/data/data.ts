@@ -2,11 +2,9 @@ import { ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Player } from './../../models/player-item/player-item';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 
 /*
   Generated class for the DataProvider provider.
@@ -37,15 +35,8 @@ export class DataProvider {
   public fileName: string;
   public ancho: number;
   public alto: number;
-  /*
-        quality: 70,
-      targetWidth: 600,
-      targetHeight: 450,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false
-  */
+
+  //CAPTURA Y BUSQUEDA DE IMAGENES EN DISPOSITIVO
     async captureImage() {
       const options: CameraOptions = {
         quality: 70,
@@ -110,6 +101,7 @@ export class DataProvider {
     }
   }
 
+  //DATOS DE FIREBASE
   getImg(path:string):Promise<any>{
     return this.afStorage.storage.ref(path).getDownloadURL();
   }

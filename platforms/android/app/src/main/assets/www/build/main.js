@@ -37,28 +37,16 @@ var AddLigaPage = /** @class */ (function () {
         this.dp = dp;
         this.nombre = "";
         this.ruta = "Ligas/";
+        this.myDate = new Date().toDateString();
         this.profile = navParams.data;
-        this.currentDate();
+        this.dp.image = "";
         this.dp.ancho = 800;
         this.dp.alto = 650;
     }
     AddLigaPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad AddLigaPage');
     };
-    AddLigaPage.prototype.currentDate = function () {
-        var today = new Date();
-        var dd = today.getDay();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            this.dia = '0' + dd;
-        }
-        if (mm < 10) {
-            this.mes = '0' + mm;
-        }
-        this.fecha = this.mes + '/' + this.dia + '/' + yyyy;
-        //document.write(this.fecha);
-    };
+    //SUBIR IMAGEN
     AddLigaPage.prototype.uploadImg = function () {
         try {
             this.dp.uploadHandlerGet();
@@ -72,34 +60,42 @@ var AddLigaPage = /** @class */ (function () {
     };
     AddLigaPage.prototype.valLiga = function (item) {
         if (item.fecha != "" && item.fecha != null &&
-            item.img != "" && item.img != null &&
             item.nombre != "" && item.nombre != null) {
             return true;
         }
         else
             return false;
     };
+    //GUARDA UNA LIGA EN FIREBASE
     AddLigaPage.prototype.crearLiga = function (path) {
         var _this = this;
         this.liga = {
             nombre: this.nombre,
             img: this.dp.fileName,
             img_: this.dp.fileName,
-            fecha: this.fecha
+            fecha: this.myDate
         };
         console.log(this.liga);
         if (this.valLiga(this.liga)) {
-            this.dp.addItemCustomKey(this.liga, path, this.liga.nombre).then(function () {
-                _this.toast.create({
-                    message: 'Liga creada exitosamente!',
+            if (this.liga.img != "" && this.liga.img != null) {
+                this.dp.addItemCustomKey(this.liga, path, this.liga.nombre).then(function () {
+                    _this.toast.create({
+                        message: 'Liga creada exitosamente!',
+                        duration: 3000
+                    }).present();
+                }).catch(function (err) {
+                    _this.toast.create({
+                        message: err,
+                        duration: 3000
+                    }).present();
+                });
+            }
+            else {
+                this.toast.create({
+                    message: "Seleccione una imagen",
                     duration: 3000
                 }).present();
-            }).catch(function (err) {
-                _this.toast.create({
-                    message: err,
-                    duration: 3000
-                }).present();
-            });
+            }
         }
         else {
             this.toast.create({
@@ -110,7 +106,7 @@ var AddLigaPage = /** @class */ (function () {
     };
     AddLigaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-add-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/'<!--\n  Generated template for the AddLigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Nueva Liga</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    \n\n    <ion-item no-lines>\n      <ion-label floating>Nombre de la liga</ion-label>\n      <ion-input type="text" [(ngModel)]="nombre"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Imagen</ion-label>\n      <ion-input type="text" [(ngModel)]="dp.fileName"></ion-input>\n    </ion-item>\n    \n    <ion-item>\n      <ion-label floating>Fecha</ion-label>\n      <ion-input type="text" [(ngModel)]="fecha"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Seleccione una imagen</ion-label>\n  <button ion-button  block (click)="uploadImg()">\n    Imagen de portada \n  </button>\n\n  <button ion-button clear block (click)="crearLiga(ruta)">\n      Crear Liga \n  </button>\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/,
+            selector: 'page-add-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/'<!--\n  Generated template for the AddLigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Nueva Liga</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    \n\n    <ion-item no-lines>\n      <ion-label floating>Nombre de la liga</ion-label>\n      <ion-input type="text" [(ngModel)]="nombre"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Fecha</ion-label>\n      <ion-input type="text" [(ngModel)]="myDate"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Seleccione una imagen</ion-label>\n  <button ion-button  block (click)="uploadImg()">\n    Imagen de portada \n  </button>\n\n  <button ion-button clear block (click)="crearLiga(ruta)">\n      Crear Liga \n  </button>\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
@@ -454,7 +450,7 @@ var PartidaPage = /** @class */ (function () {
     };
     PartidaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["m" /* Component */])({
-            selector: 'page-partida',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\partida\partida.html"*/'<!--\n  Generated template for the PartidaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>partida</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding center text-center>\n  <ion-title>Nueva Partida</ion-title>\n  <img src="" alt=""/>\n  <ion-list>\n\n    <ion-item no-lines>\n      <ion-label floating>Email jugador</ion-label>\n      <ion-input type="text" [(ngModel)]="email" value="{{this.email}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Email/nombre oponente</ion-label>\n      <ion-input type="text" [(ngModel)]=emailOp></ion-input>\n    </ion-item>\n\n    <ion-list>\n      <ion-item>\n        <ion-label>Resultado</ion-label>\n        <ion-select [(ngModel)]="ganador">\n          <ion-option value="{{this.email}}">Victoria</ion-option>\n          <ion-option value="{{this.emailOp}}">Derrota</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <ion-item>\n      <ion-label>Enviar verificacion</ion-label>\n      <ion-checkbox color="primary" checked="false"></ion-checkbox>\n    </ion-item>\n\n  </ion-list>\n\n  <ion-label stacked>Guardar Partida</ion-label>\n  <button ion-button block (click)="saveData()">\n      Guardar\n  </button>\n\n  <!--\n  <ion-label stacked>Limpiar Campos</ion-label>\n  <button ion-button block color="grey" (click)="clearData()" >\n      Limpiar\n  </button>-->\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\partida\partida.html"*/,
+            selector: 'page-partida',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\partida\partida.html"*/'<!--\n  Generated template for the PartidaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>partida</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding center text-center>\n  <ion-title>Nueva Partida</ion-title>\n  <img src="" alt=""/>\n  <ion-list>\n\n    <ion-item no-lines>\n      <ion-label floating>Email jugador</ion-label>\n      <ion-input type="text" [(ngModel)]="email" value="{{this.email}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Email/nombre oponente</ion-label>\n      <ion-input type="text" [(ngModel)]=emailOp></ion-input>\n    </ion-item>\n\n    <ion-list>\n      <ion-item>\n        <ion-label>Resultado</ion-label>\n        <ion-select [(ngModel)]="ganador">\n          <ion-option value="{{this.email}}">Victoria</ion-option>\n          <ion-option value="{{this.emailOp}}">Derrota</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n  <!-- Envio de notificaciones \n    <ion-item>\n      <ion-label>Enviar verificacion</ion-label>\n      <ion-checkbox color="primary" checked="false"></ion-checkbox>\n    </ion-item>\n  -->\n  </ion-list>\n\n  <ion-label stacked>Guardar Partida</ion-label>\n  <button ion-button block (click)="saveData()">\n      Guardar\n  </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\partida\partida.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavParams */],
@@ -528,7 +524,7 @@ var LoginPage = /** @class */ (function () {
         var _this = this;
         var that = this;
         var loader = this.loadingCtrl.create({
-            content: "Please wait..."
+            content: "Por favor espere..."
         });
         if (this.email != null && this.password != null) {
             loader.present();
@@ -844,14 +840,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_add_liga_add_liga__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_register_register__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_data_data__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2__ = __webpack_require__(511);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_angularfire2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_fire_auth__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__ = __webpack_require__(256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_partidas_jugadores_partidas_jugadores__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_partidas_jugadores_partidas_jugadores__ = __webpack_require__(511);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_database__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_fire_auth__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_storage__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_angularfire2_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_camera__ = __webpack_require__(134);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -877,12 +873,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 //import providers
 
 
+
 //Firebase imports
 
 
 
 
-
+//camara movil
 
 //Datos del proyecto en firebase
 var firebaseConfig = {
@@ -924,10 +921,10 @@ var AppModule = /** @class */ (function () {
                 }),
                 //Indicamos los imports de firebase en NgModule
                 //iniciamos la app con la constante del proyecto de firebase
-                __WEBPACK_IMPORTED_MODULE_16_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
-                __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["AngularFireDatabaseModule"],
-                __WEBPACK_IMPORTED_MODULE_18__angular_fire_auth__["b" /* AngularFireAuthModule */],
-                __WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__["AngularFireStorageModule"]
+                __WEBPACK_IMPORTED_MODULE_17_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
+                __WEBPACK_IMPORTED_MODULE_18_angularfire2_database__["AngularFireDatabaseModule"],
+                __WEBPACK_IMPORTED_MODULE_19__angular_fire_auth__["b" /* AngularFireAuthModule */],
+                __WEBPACK_IMPORTED_MODULE_20_angularfire2_storage__["AngularFireStorageModule"]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
@@ -947,7 +944,7 @@ var AppModule = /** @class */ (function () {
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
                 __WEBPACK_IMPORTED_MODULE_14__providers_register_register__["a" /* RegisterProvider */],
                 __WEBPACK_IMPORTED_MODULE_15__providers_data_data__["a" /* DataProvider */],
-                __WEBPACK_IMPORTED_MODULE_20__providers_partidas_jugadores_partidas_jugadores__["a" /* PartidasJugadoresProvider */],
+                __WEBPACK_IMPORTED_MODULE_16__providers_partidas_jugadores_partidas_jugadores__["a" /* PartidasJugadoresProvider */],
                 __WEBPACK_IMPORTED_MODULE_21__ionic_native_camera__["a" /* Camera */]
             ]
         })
@@ -1114,15 +1111,7 @@ var DataProvider = /** @class */ (function () {
         this.camera = camera;
         this.toast = toast;
     }
-    /*
-          quality: 70,
-        targetWidth: 600,
-        targetHeight: 450,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        saveToPhotoAlbum: false
-    */
+    //CAPTURA Y BUSQUEDA DE IMAGENES EN DISPOSITIVO
     DataProvider.prototype.captureImage = function () {
         return __awaiter(this, void 0, void 0, function () {
             var options;
@@ -1221,6 +1210,7 @@ var DataProvider = /** @class */ (function () {
             });
         });
     };
+    //DATOS DE FIREBASE
     DataProvider.prototype.getImg = function (path) {
         return this.afStorage.storage.ref(path).getDownloadURL();
     };
@@ -1361,12 +1351,12 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 512:
+/***/ 511:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartidasJugadoresProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(512);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1434,7 +1424,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, db, loadingCtrl, rp, afAuth, toast, dataProvider) {
+    function HomePage(navCtrl, db, loadingCtrl, rp, afAuth, toast, dataProvider, alertCtrl) {
         this.navCtrl = navCtrl;
         this.db = db;
         this.loadingCtrl = loadingCtrl;
@@ -1442,6 +1432,7 @@ var HomePage = /** @class */ (function () {
         this.afAuth = afAuth;
         this.toast = toast;
         this.dataProvider = dataProvider;
+        this.alertCtrl = alertCtrl;
         this.email = "";
         //item: string;
         this.d = "Dominaria_.jpg";
@@ -1456,7 +1447,7 @@ var HomePage = /** @class */ (function () {
         console.log(Math.floor(Math.random() * (4 - 1) + 1));
         //this.loadImg("Dominaria_.jpg");
     }
-    //Get info from firebase
+    //toma informacion de firebase
     HomePage.prototype.getFirebase = function () {
         var _this = this;
         this.db.list('/Ligas').valueChanges().subscribe(function (data) {
@@ -1464,6 +1455,35 @@ var HomePage = /** @class */ (function () {
             _this.items = data;
         });
     };
+    //Elimina la liga pasada por parametro del firebase
+    HomePage.prototype.delLiga = function (l) {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Confirmar cambios',
+            message: 'Quiere borrar la liga de ' + l.nombre + '?',
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Si',
+                    handler: function () {
+                        alert.present();
+                        var lig = _this.db.list("Ligas/");
+                        lig.remove(l.nombre).then(function (c) {
+                            console.log("Borrado");
+                        });
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    //get correo del usuario registrado, anonimo si no hay defecto
     HomePage.prototype.getEmail = function () {
         if (this.rp.valEmail()) {
             this.email = this.rp.getEmailUser();
@@ -1481,6 +1501,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.irPageParams = function (param) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */], param);
     };
+    //Mensaje de bienvenida para usuariosautenticados
     HomePage.prototype.ionViewWillLoad = function () {
         var _this = this;
         this.afAuth.authState.take(1).subscribe(function (data) {
@@ -1511,7 +1532,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" (click)="irLiga(item)">\n      <!--\n      <ion-thumbnail item-start>\n        <img/>\n      </ion-thumbnail>\n    <button ion-button clear item-end (click)="irLiga(item)">View</button>\n    -->  \n      <h2>{{item.nombre}}</h2>\n      <p>Hayao Miyazaki • {{item.fecha}}</p>      \n    </ion-item>    \n  </ion-list>\n\n    <button ion-button icon-only clear large (click)="addLiga()">\n      <ion-icon name="add-circle"></ion-icon>\n    </button>\n\n    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>\n      <ion-icon name="person" ></ion-icon>\n    </button>\n\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" >\n      <!--\n      <ion-thumbnail item-start>\n        <img/>\n      </ion-thumbnail>\n    <button ion-button clear item-end (click)="irLiga(item)">View</button>\n    -->\n      <ion-item>\n      <div (click)="irLiga(item)" >\n      <h2>{{item.nombre}}</h2>\n      <p>Fecha de inicio {{item.fecha}}</p> \n      </div>\n      </ion-item> \n      <button ion-button icon-only clear large item-end (click)="delLiga(item)">\n        <ion-icon name="close" color="danger"></ion-icon>\n      </button> \n\n      \n    </ion-item> \n   \n  </ion-list>\n\n    <button ion-button icon-only clear large (click)="addLiga()">\n      <ion-icon name="add-circle" ></ion-icon>\n    </button>\n\n    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>\n      <ion-icon name="person" ></ion-icon>\n    </button>\n\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["AngularFireDatabase"],
@@ -1519,7 +1540,8 @@ var HomePage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_8__providers_register_register__["a" /* RegisterProvider */],
             __WEBPACK_IMPORTED_MODULE_4__angular_fire_auth__["a" /* AngularFireAuth */],
             __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1__providers_data_data__["a" /* DataProvider */]])
+            __WEBPACK_IMPORTED_MODULE_1__providers_data_data__["a" /* DataProvider */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["a" /* AlertController */]])
     ], HomePage);
     return HomePage;
 }());
@@ -1580,6 +1602,7 @@ var EditProfilePage = /** @class */ (function () {
             _this.meta = url;
         });
     };
+    //ACTUALIZA DATOS DE PERFIL DE USUARIO
     EditProfilePage.prototype.updateProfile = function () {
         var _this = this;
         var alert = this.alertCtrl.create({
@@ -1611,6 +1634,7 @@ var EditProfilePage = /** @class */ (function () {
         });
         alert.present();
     };
+    //TOMA LA IMAGEN DEL PERFIL DEL USUARIO ACTUAL
     EditProfilePage.prototype.takeProfileImage = function () {
         try {
             this.dbProvider.uploadHandler();
@@ -1622,6 +1646,7 @@ var EditProfilePage = /** @class */ (function () {
             }).present();
         }
     };
+    //OBTIENE LA IMAGEN DEL PERFIL DEL USUARIO ACTUAL
     EditProfilePage.prototype.getProfileImage = function () {
         try {
             this.dbProvider.uploadHandlerGet();
@@ -1635,7 +1660,7 @@ var EditProfilePage = /** @class */ (function () {
     };
     EditProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <img Margin="center" src="{{meta}}" alt="profileImage"/>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Cambiar imagen de perfil</ion-label>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col col-6 >\n        <button ion-button block (click)="takeProfileImage()">\n          Camara\n        </button>      \n      </ion-col>\n      <ion-col col-6 >\n        <button ion-button block (click)="getProfileImage()">\n          Galeria\n        </button>      \n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <button ion-button clear block (click)="updateProfile()">\n      Actualizar Perfil\n  </button>\n\n  <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>\n  <img *ngIf="dbProvider.image" [src]="dbProvider.image"/>\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
+            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <ion-avatar Margin="center">\n      <img src="{{meta}}" alt="profileImage"/>\n    </ion-avatar>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Cambiar imagen de perfil</ion-label>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col col-6 >\n        <button ion-button block (click)="takeProfileImage()">\n          Camara\n        </button>      \n      </ion-col>\n      <ion-col col-6 >\n        <button ion-button block (click)="getProfileImage()">\n          Galeria\n        </button>      \n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <button ion-button clear block (click)="updateProfile()">\n      Actualizar Perfil\n  </button>\n\n  <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>\n  <img *ngIf="dbProvider.image" [src]="dbProvider.image"/>\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
