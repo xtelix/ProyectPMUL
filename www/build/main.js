@@ -765,23 +765,23 @@ var map = {
 		5
 	],
 	"../pages/liga/liga.module": [
-		525,
+		527,
 		4
 	],
 	"../pages/login/login.module": [
-		526,
+		525,
 		3
 	],
 	"../pages/partida/partida.module": [
-		527,
+		529,
 		2
 	],
 	"../pages/profile/profile.module": [
-		528,
+		526,
 		1
 	],
 	"../pages/register/register.module": [
-		529,
+		528,
 		0
 	]
 };
@@ -912,11 +912,11 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/add-liga/add-liga.module#AddLigaPageModule', name: 'AddLigaPage', segment: 'add-liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/edit-profile/edit-profile.module#EditProfilePageModule', name: 'EditProfilePage', segment: 'edit-profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/liga/liga.module#LigaPageModule', name: 'LigaPage', segment: 'liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/partida/partida.module#PartidaPageModule', name: 'PartidaPage', segment: 'partida', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/profile/profile.module#ProfilePageModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/liga/liga.module#LigaPageModule', name: 'LigaPage', segment: 'liga', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/partida/partida.module#PartidaPageModule', name: 'PartidaPage', segment: 'partida', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 //Indicamos los imports de firebase en NgModule
