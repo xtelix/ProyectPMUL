@@ -22,34 +22,37 @@
       <ion-label floating>Nombre</ion-label>
       <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label floating>Apellido</ion-label>
       <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>
     </ion-item>
-
-  <ion-label stacked>Cambiar imagen de perfil</ion-label>
-
-  <ion-grid >
-    <ion-row>
-      <ion-col col-6 >
-        <button ion-button block (click)="takeProfileImage()">
-          Camara
-        </button>      
-      </ion-col>
-      <ion-col col-6 >
-        <button ion-button block (click)="getProfileImage()">
-          Galeria
-        </button>      
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <button ion-button clear block (click)="updateProfile()">
-      Actualizar Perfil
-  </button>
-
-  <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>
-  <img *ngIf="dbProvider.image" [src]="dbProvider.image"/>
-  
+    <ion-label stacked>Cambiar imagen de perfil</ion-label>
+    <ion-grid >
+      <ion-row>
+        <ion-col col-6 >
+          <button ion-button block (click)="takeProfileImage()">
+            Camara
+          </button>      
+        </ion-col>
+        <ion-col col-6 >
+          <button ion-button block (click)="getProfileImage()">
+            Galeria
+          </button>      
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button outline block (click)="updateProfile()" class="col-12" >
+            Actualizar Perfil
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dbProvider.image" style="margin-top: 40px;">
+        <ion-col col-12>
+          <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>
+          <img [src]="dbProvider.image"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>  
 </ion-content>

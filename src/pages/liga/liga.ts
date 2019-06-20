@@ -3,12 +3,10 @@ import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { PartidaPage } from './../partida/partida';
 import { HomePage } from './../home/home';
 import { Player } from './../../models/player-item/player-item';
-import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController} from 'ionic-angular';
-import { VariableAst } from '@angular/compiler';
 import { RegisterProvider } from '../../providers/register/register';
 
 /**
@@ -53,9 +51,6 @@ export class LigaPage {
               public db: AngularFireDatabase) {
   this.item = navParams.data;
 
-  //this.getImg(this.item.img);
-  this.loadImg();
-
   this.itemsRef = db.list("Ligas/"+this.item.nombre+'/Jugadores');
   // Use snapshotChanges().map() to store the key
   this.items = this.itemsRef.snapshotChanges().pipe(
@@ -85,12 +80,6 @@ export class LigaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LigaPage');
-  }
-
-  loadImg(){   
-    this.dataProvider.getImg(this.item.img).then((url)=>{     
-      this.meta = url;
-    });
   }
 
   getEmail(){    

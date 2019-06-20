@@ -1,5 +1,4 @@
 import { ProfilePage } from './../profile/profile';
-import { HomePage } from './../home/home';
 import { RegisterProvider } from './../../providers/register/register';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController, ToastController } from 'ionic-angular';

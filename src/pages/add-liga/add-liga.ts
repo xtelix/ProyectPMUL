@@ -1,6 +1,4 @@
-import { FirebaseStorage } from 'angularfire2';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { Liga } from './../../models/player-item/league-item';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Toast, ToastController } from 'ionic-angular';
@@ -30,6 +28,7 @@ export class AddLigaPage {
   ruta: string = "Ligas/";
 
   liga: Liga;
+  pathTemp: string = "";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -71,13 +70,22 @@ export class AddLigaPage {
     }else return false;
   }
 
+  loadImg(imgName){  
+    try {
+      this.dp.getImg(imgName).then((url)=>{     
+        this.pathTemp = url;
+      });
+    } catch (error) {
+    }
+  }
+
   //GUARDA UNA LIGA EN FIREBASE
   crearLiga(path: string){
-
+  this.loadImg(this.dp.fileName);
   this.liga = {
     nombre: this.nombre,
-    img: this.dp.fileName,
-    img_: this.dp.fileName,
+    img: this.pathTemp,
+    img_: this.pathTemp,
     fecha: this.myDate
   };
 

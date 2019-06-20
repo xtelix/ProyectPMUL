@@ -1,6 +1,4 @@
-import { ProfilePage } from './../pages/profile/profile';
 import { RegisterProvider } from './../providers/register/register';
-import { RegisterPage } from './../pages/register/register';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';

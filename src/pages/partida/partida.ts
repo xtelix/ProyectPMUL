@@ -4,11 +4,9 @@ import { DataProvider } from './../../providers/data/data';
 import { RegisterProvider } from './../../providers/register/register';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { EmailValidator } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
-import { templateJitUrl } from '@angular/compiler';
+
 
 
 /**

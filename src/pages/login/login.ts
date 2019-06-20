@@ -3,7 +3,7 @@ import { RegisterProvider } from './../../providers/register/register';
 import { RegisterPage } from './../register/register';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { bloomAdd } from '@angular/core/src/render3/di';
+
 
 /**
  * Generated class for the LoginPage page.

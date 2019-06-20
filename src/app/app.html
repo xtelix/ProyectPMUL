@@ -9,10 +9,20 @@
         <ion-list>
            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
             {{p.title}}
-           </button>          
+           </button>
+           <!--
+           <button menuClose ion-item>
+                <ion-icon name="settings"></ion-icon>
+                Configuración
+            </button> 
+           -->
+           <a menuClose ion-item href="https://github.com/xtelix/ProyectPMUL">
+                <ion-icon name="help-circle"></ion-icon>
+                Ayuda
+            </a>           
            <button menuClose ion-item icon-start (click)="exitUser()">
                 <ion-icon name="exit"></ion-icon>
-                 Exit
+                 Salir
             </button>
         </ion-list>
     </ion-content>

@@ -1,12 +1,6 @@
-import { HomePage } from './../../pages/home/home';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { auth } from 'firebase/app';
 import { AlertController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { RegisterPage } from '../../pages/register/register';
-
 /*
   Generated class for the RegisterProvider provider.
 

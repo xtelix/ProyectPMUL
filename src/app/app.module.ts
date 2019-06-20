@@ -50,7 +50,7 @@ export const firebaseConfig = {
     PartidaPage,
     ProfilePage,
     EditProfilePage,
-    AddLigaPage
+    AddLigaPage,
   ],
   imports: [
     BrowserModule,

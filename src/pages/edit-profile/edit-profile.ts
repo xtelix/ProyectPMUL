@@ -1,3 +1,4 @@
+import { Perfil } from './../../models/player-item/userProfile-items';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
@@ -26,6 +27,15 @@ export class EditProfilePage {
               public alertCtrl: AlertController,
               public toast: ToastController) {
       this.user = navParams.data; 
+      if(navParams.data.user == null){
+        this.user.user = {
+          email: "",
+          firstName: "",
+          lastName: "",
+          imgProfile: ""
+        };
+      }
+      console.log(navParams.data)
       console.log(this.user);
       this.dbProvider.ancho = 125;
       this.dbProvider.alto = 125;
@@ -39,9 +49,13 @@ export class EditProfilePage {
   }
 
   loadImg(){   
-    this.dbProvider.getImg(this.user.user.imgProfile).then((url)=>{     
-      this.meta = url;
-    });
+    try {
+      this.dbProvider.getImg(this.user.user.imgProfile).then((url)=>{     
+        this.meta = url;
+      });
+    } catch (error) {
+      console.log(error);
+    }  
   }
 
   //ACTUALIZA DATOS DE PERFIL DE USUARIO
@@ -59,7 +73,7 @@ export class EditProfilePage {
         },
         {
           text: 'Confirmar',
-          handler: () => {
+          handler: () => {        
             this.user.user.imgProfile = this.dbProvider.fileName;
             this.dbProvider.editItemKey(this.user.user, "perfil/", this.user.userId).then(ref =>{
               //console.log (ref.key);

@@ -12,35 +12,29 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let item of items" >
-      <!--
-      <ion-thumbnail item-start>
-        <img/>
-      </ion-thumbnail>
-    <button ion-button clear item-end (click)="irLiga(item)">View</button>
-    -->
-      <ion-item>
-      <div (click)="irLiga(item)" >
-      <h2>{{item.nombre}}</h2>
-      <p>Fecha de inicio {{item.fecha}}</p> 
-      </div>
-      </ion-item> 
+        <ion-thumbnail item-start (click)="irLiga(item)">
+          <img src="{{item.img}}"/>
+        </ion-thumbnail>
+      <!-- <button ion-button clear item-end (click)="irLiga(item)">View</button> -->
+          <div (click)="irLiga(item)"> 
+            <h2>{{item.nombre}}</h2>
+            <p>Fecha de inicio {{item.fecha}}</p> 
+          </div>  
       <button ion-button icon-only clear large item-end (click)="delLiga(item)">
         <ion-icon name="close" color="danger"></ion-icon>
-      </button> 
-
-      
+      </button>  
     </ion-item> 
-   
   </ion-list>
-
-    <button ion-button icon-only clear large (click)="addLiga()">
-      <ion-icon name="add-circle" ></ion-icon>
-    </button>
-
-    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>
-      <ion-icon name="person" ></ion-icon>
-    </button>
-
 </ion-content>
+<div class="tabs-bar">
+  <button ion-button icon-only clear large (click)="addLiga()">
+      <!-- <ion-icon name="add-circle" ></ion-icon> -->
+      <span>Crear Liga</span>
+    </button>
+    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>
+      <!-- <ion-icon name="person" ></ion-icon> -->
+      <span>Editar Perfil</span>
+    </button>
+</div>
 
 

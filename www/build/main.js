@@ -37,6 +37,7 @@ var AddLigaPage = /** @class */ (function () {
         this.dp = dp;
         this.nombre = "";
         this.ruta = "Ligas/";
+        this.pathTemp = "";
         this.myDate = new Date().toDateString();
         this.profile = navParams.data;
         this.dp.image = "";
@@ -66,13 +67,24 @@ var AddLigaPage = /** @class */ (function () {
         else
             return false;
     };
+    AddLigaPage.prototype.loadImg = function (imgName) {
+        var _this = this;
+        try {
+            this.dp.getImg(imgName).then(function (url) {
+                _this.pathTemp = url;
+            });
+        }
+        catch (error) {
+        }
+    };
     //GUARDA UNA LIGA EN FIREBASE
     AddLigaPage.prototype.crearLiga = function (path) {
         var _this = this;
+        this.loadImg(this.dp.fileName);
         this.liga = {
             nombre: this.nombre,
-            img: this.dp.fileName,
-            img_: this.dp.fileName,
+            img: this.pathTemp,
+            img_: this.pathTemp,
             fecha: this.myDate
         };
         console.log(this.liga);
@@ -106,7 +118,7 @@ var AddLigaPage = /** @class */ (function () {
     };
     AddLigaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-add-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/'<!--\n  Generated template for the AddLigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Nueva Liga</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    \n\n    <ion-item no-lines>\n      <ion-label floating>Nombre de la liga</ion-label>\n      <ion-input type="text" [(ngModel)]="nombre"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Fecha</ion-label>\n      <ion-input type="text" [(ngModel)]="myDate"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Seleccione una imagen</ion-label>\n  <button ion-button  block (click)="uploadImg()">\n    Imagen de portada \n  </button>\n\n  <button ion-button clear block (click)="crearLiga(ruta)">\n      Crear Liga \n  </button>\n\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/,
+            selector: 'page-add-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/'<!--\n  Generated template for the AddLigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Nueva Liga</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding text-center>\n    \n\n    <ion-item no-lines>\n      <ion-label floating>Nombre de la liga</ion-label>\n      <ion-input type="text" [(ngModel)]="nombre"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Fecha</ion-label>\n      <ion-input type="text" [(ngModel)]="myDate"></ion-input>\n    </ion-item>\n\n    <ion-label stacked>Seleccione una imagen</ion-label>\n    <button ion-button block (click)="uploadImg()">\n      Imagen de portada \n    </button>\n\n    <button ion-button outline block (click)="crearLiga(ruta)">\n      Crear Liga \n    </button>\n   \n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\add-liga\add-liga.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
@@ -184,8 +196,6 @@ var LigaPage = /** @class */ (function () {
         };
         this.playerTemp = this.player;
         this.item = navParams.data;
-        //this.getImg(this.item.img);
-        this.loadImg();
         this.itemsRef = db.list("Ligas/" + this.item.nombre + '/Jugadores');
         // Use snapshotChanges().map() to store the key
         this.items = this.itemsRef.snapshotChanges().pipe(Object(__WEBPACK_IMPORTED_MODULE_0_rxjs_operators__["map"])(function (changes) {
@@ -212,12 +222,6 @@ var LigaPage = /** @class */ (function () {
     };
     LigaPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad LigaPage');
-    };
-    LigaPage.prototype.loadImg = function () {
-        var _this = this;
-        this.dataProvider.getImg(this.item.img).then(function (url) {
-            _this.meta = url;
-        });
     };
     LigaPage.prototype.getEmail = function () {
         if (this.rp.valEmail()) {
@@ -295,7 +299,7 @@ var LigaPage = /** @class */ (function () {
     };
     LigaPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["m" /* Component */])({
-            selector: 'page-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\liga\liga.html"*/'<!--\n  Generated template for the LigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Liga de {{item.nombre}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <img src="{{meta}}"/>\n  <ion-grid >\n    <ion-row>\n      <ion-col col-12 *ngIf="!participando">\n        <button ion-button full (click)="participar(player)">Participar</button>\n      </ion-col>\n      <ion-col col-6 *ngIf="participando">\n          <button ion-button full color="danger" (click)="abandonar(player)">Abandonar</button>\n      </ion-col>\n      <ion-col col-6 *ngIf="participando">\n          <button ion-button full (click)="newGame(this.item)">Nueva Partida</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <!-- Lista de jugadores -->\n  \n    <ion-list >\n      <ion-list-header color="primary">\n        Participantes: {{participantes}}\n      </ion-list-header>\n  \n      <ion-item-sliding *ngFor="let jugador of players">\n        <ion-item *ngIf="jugador.email != playerTemp.email">\n          <!-- Añadir avatars de usuarios\n          <ion-avatar item-start>\n            \n          </ion-avatar>\n          -->\n          <h2>{{jugador.email}}</h2>\n          <p>Partidas: {{jugador.partidas}} Victorias: {{jugador.victorias}}</p>\n        </ion-item>\n        <ion-item-options>\n          <!--\n          <button ion-button color="primary" icon-start (click)="showPlayerData(jugador)">\n            <ion-icon name="person"></ion-icon>\n            Datos\n          </button>-->\n          <button ion-button color="secondary" icon-start (click)="newGame(this.item)">\n            <ion-icon name="game-controller-b"></ion-icon>\n            Partida\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <ion-list *ngIf="participando">\n        <ion-list-header color="primary">\n            Jugador: {{playerTemp.email}}\n        </ion-list-header>\n        <ion-item>    \n          <label>Puntuacion: {{playerTemp.partidas + (playerTemp.victorias * 2)}}</label><br/>\n          <label>Partidas totales: {{playerTemp.partidas}}</label><br/>\n          <label>Victorias: {{playerTemp.victorias}} </label>\n        </ion-item>\n    </ion-list>\n\n  \n  <!-- lista de jugadores -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\liga\liga.html"*/,
+            selector: 'page-liga',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\liga\liga.html"*/'<!--\n  Generated template for the LigaPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Liga de {{item.nombre}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <img src="{{this.item.img}}"/>\n  <ion-grid >\n    <ion-row>\n      <ion-col col-12 *ngIf="!participando">\n        <button ion-button full (click)="participar(player)">Participar</button>\n      </ion-col>\n      <ion-col col-6 *ngIf="participando">\n          <button ion-button full color="danger" (click)="abandonar(player)">Abandonar</button>\n      </ion-col>\n      <ion-col col-6 *ngIf="participando">\n          <button ion-button full (click)="newGame(this.item)">Nueva Partida</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <!-- Lista de jugadores -->\n  \n    <ion-list >\n      <ion-list-header color="primary">\n        Participantes: {{participantes}}\n      </ion-list-header>\n  \n      <ion-item-sliding *ngFor="let jugador of players">\n        <ion-item *ngIf="jugador.email != playerTemp.email">\n          <!-- Añadir avatars de usuarios\n          <ion-avatar item-start>\n            \n          </ion-avatar>\n          -->\n          <h2>{{jugador.email}}</h2>\n          <p>Partidas: {{jugador.partidas}} Victorias: {{jugador.victorias}}</p>\n        </ion-item>\n        <ion-item-options>\n          <!--\n          <button ion-button color="primary" icon-start (click)="showPlayerData(jugador)">\n            <ion-icon name="person"></ion-icon>\n            Datos\n          </button>-->\n          <button ion-button color="secondary" icon-start (click)="newGame(this.item)">\n            <ion-icon name="game-controller-b"></ion-icon>\n            Partida\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <ion-list *ngIf="participando">\n        <ion-list-header color="primary">\n            Jugador: {{playerTemp.email}}\n        </ion-list-header>\n        <ion-item>    \n          <label>Puntuacion: {{playerTemp.partidas + (playerTemp.victorias * 2)}}</label><br/>\n          <label>Partidas totales: {{playerTemp.partidas}}</label><br/>\n          <label>Victorias: {{playerTemp.victorias}} </label>\n        </ion-item>\n    </ion-list>\n\n  \n  <!-- lista de jugadores -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\liga\liga.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["i" /* NavParams */],
@@ -765,11 +769,11 @@ var map = {
 		5
 	],
 	"../pages/liga/liga.module": [
-		527,
+		525,
 		4
 	],
 	"../pages/login/login.module": [
-		525,
+		526,
 		3
 	],
 	"../pages/partida/partida.module": [
@@ -777,7 +781,7 @@ var map = {
 		2
 	],
 	"../pages/profile/profile.module": [
-		526,
+		527,
 		1
 	],
 	"../pages/register/register.module": [
@@ -904,7 +908,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__pages_partida_partida__["a" /* PartidaPage */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__["a" /* ProfilePage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_edit_profile_edit_profile__["a" /* EditProfilePage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_add_liga_add_liga__["a" /* AddLigaPage */]
+                __WEBPACK_IMPORTED_MODULE_13__pages_add_liga_add_liga__["a" /* AddLigaPage */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -912,9 +916,9 @@ var AppModule = /** @class */ (function () {
                     links: [
                         { loadChildren: '../pages/add-liga/add-liga.module#AddLigaPageModule', name: 'AddLigaPage', segment: 'add-liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/edit-profile/edit-profile.module#EditProfilePageModule', name: 'EditProfilePage', segment: 'edit-profile', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/liga/liga.module#LigaPageModule', name: 'LigaPage', segment: 'liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/profile/profile.module#ProfilePageModule', name: 'ProfilePage', segment: 'profile', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/liga/liga.module#LigaPageModule', name: 'LigaPage', segment: 'liga', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/partida/partida.module#PartidaPageModule', name: 'PartidaPage', segment: 'partida', priority: 'low', defaultHistory: [] }
                     ]
@@ -1337,7 +1341,7 @@ var MyApp = /** @class */ (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\app\app.html"*/'<ion-menu  [content]="content" swipeEnabled="false">\n    <ion-header>\n        <ion-toolbar color="primary">\n            <ion-title>Pages</ion-title>\n        </ion-toolbar>\n    </ion-header>\n   \n    <ion-content>\n        <ion-list>\n           <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n            {{p.title}}\n           </button>          \n           <button menuClose ion-item icon-start (click)="exitUser()">\n                <ion-icon name="exit"></ion-icon>\n                 Exit\n            </button>\n        </ion-list>\n    </ion-content>\n      \n</ion-menu>\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\app\app.html"*/'<ion-menu  [content]="content" swipeEnabled="false">\n    <ion-header>\n        <ion-toolbar color="primary">\n            <ion-title>Pages</ion-title>\n        </ion-toolbar>\n    </ion-header>\n   \n    <ion-content>\n        <ion-list>\n           <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n            {{p.title}}\n           </button>\n           <!--\n           <button menuClose ion-item>\n                <ion-icon name="settings"></ion-icon>\n                Configuración\n            </button> \n           -->\n           <a menuClose ion-item href="https://github.com/xtelix/ProyectPMUL">\n                <ion-icon name="help-circle"></ion-icon>\n                Ayuda\n            </a>           \n           <button menuClose ion-item icon-start (click)="exitUser()">\n                <ion-icon name="exit"></ion-icon>\n                 Salir\n            </button>\n        </ion-list>\n    </ion-content>\n      \n</ion-menu>\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */],
@@ -1424,6 +1428,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = /** @class */ (function () {
+    //item: string;
+    //d: string = "Dominaria_.jpg";
     function HomePage(navCtrl, db, loadingCtrl, rp, afAuth, toast, dataProvider, alertCtrl) {
         this.navCtrl = navCtrl;
         this.db = db;
@@ -1434,8 +1440,6 @@ var HomePage = /** @class */ (function () {
         this.dataProvider = dataProvider;
         this.alertCtrl = alertCtrl;
         this.email = "";
-        //item: string;
-        this.d = "Dominaria_.jpg";
         this.liga = {
             key: "liga2",
             jorge: "andres"
@@ -1445,7 +1449,7 @@ var HomePage = /** @class */ (function () {
         this.getFirebase();
         this.getEmail();
         console.log(Math.floor(Math.random() * (4 - 1) + 1));
-        //this.loadImg("Dominaria_.jpg");
+        console.log(this.profiledata);
     }
     //toma informacion de firebase
     HomePage.prototype.getFirebase = function () {
@@ -1492,14 +1496,18 @@ var HomePage = /** @class */ (function () {
             this.email = "Anonimo";
     };
     HomePage.prototype.irLiga = function (item) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__liga_liga__["a" /* LigaPage */], item).then(function (m) {
-        });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__liga_liga__["a" /* LigaPage */], item);
     };
     HomePage.prototype.irPage = function (page) {
         this.navCtrl.push(page);
     };
     HomePage.prototype.irPageParams = function (param) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */], param);
+        if (param.user == null) {
+            alert("Este usuario no tiene un perfil");
+        }
+        else {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__["a" /* EditProfilePage */], param);
+        }
     };
     //Mensaje de bienvenida para usuariosautenticados
     HomePage.prototype.ionViewWillLoad = function () {
@@ -1532,7 +1540,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" >\n      <!--\n      <ion-thumbnail item-start>\n        <img/>\n      </ion-thumbnail>\n    <button ion-button clear item-end (click)="irLiga(item)">View</button>\n    -->\n      <ion-item>\n      <div (click)="irLiga(item)" >\n      <h2>{{item.nombre}}</h2>\n      <p>Fecha de inicio {{item.fecha}}</p> \n      </div>\n      </ion-item> \n      <button ion-button icon-only clear large item-end (click)="delLiga(item)">\n        <ion-icon name="close" color="danger"></ion-icon>\n      </button> \n\n      \n    </ion-item> \n   \n  </ion-list>\n\n    <button ion-button icon-only clear large (click)="addLiga()">\n      <ion-icon name="add-circle" ></ion-icon>\n    </button>\n\n    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>\n      <ion-icon name="person" ></ion-icon>\n    </button>\n\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Cuenta {{email}}     \n    </ion-title>     \n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item *ngFor="let item of items" >\n        <ion-thumbnail item-start (click)="irLiga(item)">\n          <img src="{{item.img}}"/>\n        </ion-thumbnail>\n      <!-- <button ion-button clear item-end (click)="irLiga(item)">View</button> -->\n          <div (click)="irLiga(item)"> \n            <h2>{{item.nombre}}</h2>\n            <p>Fecha de inicio {{item.fecha}}</p> \n          </div>  \n      <button ion-button icon-only clear large item-end (click)="delLiga(item)">\n        <ion-icon name="close" color="danger"></ion-icon>\n      </button>  \n    </ion-item> \n  </ion-list>\n</ion-content>\n<div class="tabs-bar">\n  <button ion-button icon-only clear large (click)="addLiga()">\n      <!-- <ion-icon name="add-circle" ></ion-icon> -->\n      <span>Crear Liga</span>\n    </button>\n    <button ion-button icon-only clear large (click)="irPageParams(profile)" item-end>\n      <!-- <ion-icon name="person" ></ion-icon> -->\n      <span>Editar Perfil</span>\n    </button>\n</div>\n\n\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["AngularFireDatabase"],
@@ -1586,6 +1594,15 @@ var EditProfilePage = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.toast = toast;
         this.user = navParams.data;
+        if (navParams.data.user == null) {
+            this.user.user = {
+                email: "",
+                firstName: "",
+                lastName: "",
+                imgProfile: ""
+            };
+        }
+        console.log(navParams.data);
         console.log(this.user);
         this.dbProvider.ancho = 125;
         this.dbProvider.alto = 125;
@@ -1598,9 +1615,14 @@ var EditProfilePage = /** @class */ (function () {
     };
     EditProfilePage.prototype.loadImg = function () {
         var _this = this;
-        this.dbProvider.getImg(this.user.user.imgProfile).then(function (url) {
-            _this.meta = url;
-        });
+        try {
+            this.dbProvider.getImg(this.user.user.imgProfile).then(function (url) {
+                _this.meta = url;
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
     };
     //ACTUALIZA DATOS DE PERFIL DE USUARIO
     EditProfilePage.prototype.updateProfile = function () {
@@ -1660,7 +1682,7 @@ var EditProfilePage = /** @class */ (function () {
     };
     EditProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <ion-avatar Margin="center">\n      <img src="{{meta}}" alt="profileImage"/>\n    </ion-avatar>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n\n  <ion-label stacked>Cambiar imagen de perfil</ion-label>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col col-6 >\n        <button ion-button block (click)="takeProfileImage()">\n          Camara\n        </button>      \n      </ion-col>\n      <ion-col col-6 >\n        <button ion-button block (click)="getProfileImage()">\n          Galeria\n        </button>      \n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <button ion-button clear block (click)="updateProfile()">\n      Actualizar Perfil\n  </button>\n\n  <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>\n  <img *ngIf="dbProvider.image" [src]="dbProvider.image"/>\n  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
+            selector: 'page-edit-profile',template:/*ion-inline-start:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/'<!--\n  Generated template for the EditProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Perfil personal</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-content padding text-center >\n    <ion-avatar Margin="center">\n      <img src="{{meta}}" alt="profileImage"/>\n    </ion-avatar>\n    <ion-item no-lines>\n      <ion-label floating>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.firstName"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Apellido</ion-label>\n      <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>\n    </ion-item>\n    <ion-label stacked>Cambiar imagen de perfil</ion-label>\n    <ion-grid >\n      <ion-row>\n        <ion-col col-6 >\n          <button ion-button block (click)="takeProfileImage()">\n            Camara\n          </button>      \n        </ion-col>\n        <ion-col col-6 >\n          <button ion-button block (click)="getProfileImage()">\n            Galeria\n          </button>      \n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button outline block (click)="updateProfile()" class="col-12" >\n            Actualizar Perfil\n          </button>\n        </ion-col>\n      </ion-row>\n      <ion-row *ngIf="dbProvider.image" style="margin-top: 40px;">\n        <ion-col col-12>\n          <ion-label stacked>Nueva foto de perfil {{dbProvider.fileName}}</ion-label>\n          <img [src]="dbProvider.image"/>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-content>  \n</ion-content>\n'/*ion-inline-end:"C:\Users\xtelix\Desktop\IonicProjects\LigaSellado\src\pages\edit-profile\edit-profile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],

@@ -1,19 +1,16 @@
+
 import { AddLigaPage } from './../add-liga/add-liga';
 import { Liga } from './../../models/player-item/league-item';
 import { DataProvider } from './../../providers/data/data';
 import { EditProfilePage } from './../edit-profile/edit-profile';
 import { LigaPage } from './../liga/liga';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireList } from 'angularfire2/database';
-import { Component, Provider } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase} from '@angular/fire/database';
 import { Observable } from 'rxjs/Observable';
 import { RegisterProvider } from '../../providers/register/register';
-import{ AngularFireObject } from 'angularfire2/database';
-import { Perfil } from './../../models/player-item/userProfile-items';
-
 
 @Component({
   selector: 'page-home',
@@ -30,7 +27,7 @@ export class HomePage {
   profile: any;
   meta:string;
   //item: string;
- d: string = "Dominaria_.jpg";
+  //d: string = "Dominaria_.jpg";
   constructor(public navCtrl: NavController,
               public db: AngularFireDatabase,
               public loadingCtrl: LoadingController,
@@ -44,7 +41,7 @@ export class HomePage {
     this.getFirebase();
     this.getEmail();
     console.log(Math.floor(Math.random()*(4 - 1) + 1));
-    //this.loadImg("Dominaria_.jpg");
+    console.log(this.profiledata);
   }
   //toma informacion de firebase
   getFirebase(){
@@ -55,7 +52,6 @@ export class HomePage {
       }
     );
   }
-
   //Elimina la liga pasada por parametro del firebase
   delLiga(l:Liga){
 
@@ -95,11 +91,7 @@ export class HomePage {
   }
 
   irLiga(item:any){
-    
-    this.navCtrl.push(LigaPage, item).then(m => {
-     
-    });
-    
+    this.navCtrl.push(LigaPage, item);
   }
 
   irPage(page:string){
@@ -108,7 +100,12 @@ export class HomePage {
 
   irPageParams(param:any){
     
-    this.navCtrl.push(EditProfilePage, param);
+    if(param.user == null){ 
+      alert("Este usuario no tiene un perfil");
+    }
+    else{
+      this.navCtrl.push(EditProfilePage, param);
+    }
   }
 
   //Mensaje de bienvenida para usuariosautenticados
